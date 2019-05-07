@@ -10,9 +10,6 @@
     
 
 <?php
-  //Alumnos: matricula, nombre carrera email y teléfono.
-  
-  
   
   class Alumno{
      public $matricula;
@@ -47,6 +44,7 @@
         return $data;
     }
 
+    //funcion para crear la conexion con la bd 
 function conexion(){
     $server = "localhost";
     $user = "root"; 
@@ -62,6 +60,7 @@ function conexion(){
     }
 }
 
+// funcion para insertar en la tabla de alumnos en la bd
 function insertarEnBd(){
 	/* Conexion con base de datos. */
 	$conexion = new PDO('mysql:host=localhost;dbname=tarea02;charset=UTF8', 'root', '');
@@ -75,7 +74,7 @@ function insertarEnBd(){
 	$conexion->exec($consulta);
 
 }
-
+   // funcion que muestra el fomrulario de alumnos
    function mostrarFormulario(){
 
       echo "<br><br>";
@@ -196,6 +195,7 @@ function insertarEnBd(){
      }
  }
 
+ //clase para guardar informacion de maestros
   class Maestro{
       public $noEmpleado;
       public $carrera;
@@ -228,6 +228,7 @@ function insertarEnBd(){
        return $data;
    }
 
+   //funcion para crear conexion con la bd
 function conexion(){
    $server = "localhost";
    $user = "root"; 
@@ -257,6 +258,7 @@ function insertarEnBd(){
 
 }
 
+    //funcion para mostrar el formulario de maestros
   function mostrarFormulario(){
       
     echo "<br><br>";
@@ -288,7 +290,6 @@ function insertarEnBd(){
                $this->numEmpErr = "El numero de empleado es requerido";
                } else {
                    $this->noEmpleado = $this->test_input($_POST["noEmpleado"]);
-                   // check if name only contains letters and whitespace
                    if (is_numeric($this->noEmpleado)) {
                        $this->numEmpErr = "Solo se permiten numeros";
                    }
@@ -298,7 +299,6 @@ function insertarEnBd(){
            $this->nameErr = "El nombre es requerido";
            } else {
                $this->nombre = $this->test_input($_POST["nombre"]);
-               // check if name only contains letters and whitespace
                if (!preg_match("/^[a-zA-Z ]*$/",$this->nombre)) {
                    $this->nameErr = "Solo se permiten letras y espacios en blanco";
                }
@@ -308,7 +308,6 @@ function insertarEnBd(){
                $this->carreraErr = "La carrera es requerida";
                } else {
                    $this->carrera = $this->test_input($_POST["carrera"]);
-                   // check if name only contains letters and whitespace
                    if (!preg_match("/^[a-zA-Z ]*$/",$this->carrera)) {
                        $this->carreraErr = "Solo se permiten letras y espacios en blanco";
                    }
@@ -318,7 +317,6 @@ function insertarEnBd(){
                $this->telErr = "El telefono es requerido";
                } else {
                    $this->telefono = $this->test_input($_POST["telefono"]);
-                   // check if name only contains letters and whitespace
                    if (is_numeric($this->telefono)) {
                        $this->telErr = "Solo se permiten numeros";
                    }
@@ -367,24 +365,27 @@ function insertarEnBd(){
   //Maestros: no. empleado, carrera, nombre, teléfono.
 
 
+  //creacion de objetos alumno y maestros
 $alumno = new Alumno();
 $maestro = new Maestro();
 
+//lamadas a los metodos de conexion con bd
 $maestro->conexion();
 $alumno->conexion();
 
-
+//llamada a metodos para mostrar formularios
 $alumno->mostrarFormulario();
 $maestro->mostrarFormulario();
 
-
+//llamada a metodos para validar formularios
 $alumno->validar();
 $maestro->validar();
 
+//llamada a metodos para insertar en las bd
 $alumno->insertarEnBd();
 $maestro->insertarEnBd();
 
-
+//llamada a metodos para imprimir los datos en pantalla
 $alumno->toString();
 $maestro->toString();
 ?>
