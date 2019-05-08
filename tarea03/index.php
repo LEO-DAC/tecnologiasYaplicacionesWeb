@@ -1,29 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
 
   <?php
-    include "Alumno.php";
+    // se incluye la clase para manejar datos de alumnos
+ include "Promedio.php";
 
-    //clase para manejar datos de alumnos
+ 
     
-    //contador para controlar el arreglo y el ciclo
+        $contador=0;
+        $nombres= array("Leonardo","Jose","Miguel","Luis","Carlos","Fernando","Paola","Jessica","Juan","Hector");
+        while($contador<10){           
 
-        //instancia la clase alumno y se manda llamar al metodo para mostrar el formulario
-        $alumno1= new Alumno();
-        $alumno1->mostrarFormulario();   
-        $alumno1->validar();         
-        $alumno1->calcularPromedio();   
-        $alumno1->toString();
+             $arreglo[$contador]= new Promedio();
+             $contador2=0;
+             $nombre = $nombres[rand(0,9)];
 
+             if($contador==0){
+                $arreglo[$contador]->setNombre($nombre);
+            }
+
+             while($contador2<=$contador && $contador>0){
+                    if($contador==$contador2){
+                        $arreglo[$contador]->setNombre($nombre);
+                        break;
+                        }
+
+                    if($nombre!=$arreglo[$contador2]->getNombre()){
+                        $contador2++;         
+                   }else{
+                     $nombre = $nombres[rand(0,9)];
+                     $contador2=0;
+                   }
+                   
+             }
+
+          //   $arreglo[$contador]->setNombre("Leonardo");
+             $arreglo[$contador]->setCalif1(rand(0,100));
+             $arreglo[$contador]->setCalif2(rand(0,100));
+             $arreglo[$contador]->setCalif3(rand(0,100));
+             $arreglo[$contador]->calcularPromedio();
+             $arreglo[$contador]->toString();
+             $contador++;
+
+        }
+
+  //      echo "<br>tamaño del arreglo: ".sizeof($arreglo);
   ?>
-
-</body>
-</html>
-
