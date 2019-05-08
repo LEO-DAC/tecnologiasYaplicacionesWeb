@@ -6,7 +6,9 @@
  
     
         $contador=0;
+        //arreglo de nombres
         $nombres= array("Leonardo","Jose","Miguel","Luis","Carlos","Fernando","Paola","Jessica","Juan","Hector");
+        //ciclo para asignar nombres y calificaciones aleatorias
         while($contador<10){           
 
              $arreglo[$contador]= new Promedio();
@@ -42,5 +44,8 @@
 
         }
 
-  //      echo "<br>tamaño del arreglo: ".sizeof($arreglo);
+  
   ?>
+
+
+
