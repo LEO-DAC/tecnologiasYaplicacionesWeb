@@ -34,15 +34,30 @@
                    
              }
 
-          //   $arreglo[$contador]->setNombre("Leonardo");
              $arreglo[$contador]->setCalif1(rand(0,100));
              $arreglo[$contador]->setCalif2(rand(0,100));
              $arreglo[$contador]->setCalif3(rand(0,100));
              $arreglo[$contador]->calcularPromedio();
-             $arreglo[$contador]->toString();
+             //$arreglo[$contador]->toString();
              $contador++;
 
         }
+
+        for ($i=0; $i <10 ; $i++) { 
+          for ($j=0; $j <10 ; $j++) { 
+               if($arreglo[$i]->getPromedio()>$arreglo[$j]->getPromedio()){
+                  $temp = $arreglo[$i];
+                  $arreglo[$i]=$arreglo[$j];
+                  $arreglo[$j]=$temp;  
+               }
+          }
+        }
+
+        $contador=0;
+        while($contador<10){
+              $arreglo[$contador]->toString(); 
+              $contador++;
+            }
 
   
   ?>
