@@ -16,6 +16,7 @@
 
 </head>
 <script type="text/javascript">
+   // codigo js para crear alerta en caso de eliminar usuario
    function confirmDelete(){
       var respuesta = confirm("¿Estas seguro de borrar  a este cliente?");
 
@@ -46,6 +47,7 @@
             <?php
             include ("database.php");
               $clientes =  new Database();
+              // consulta para cargar la tabla que muestra los usuarios
               $res = $clientes->full_record();
               
               foreach ($res->fetch_all(MYSQLI_ASSOC) as $value) {

@@ -32,6 +32,7 @@
             $id = $_GET['id'];
 
             $clientes =  new Database();
+            // se recupera el usuario el cual será modificado usando el id
             $cliente = $clientes->single_record($id);
 
             if (isset($_POST) && !empty($_POST)) {
@@ -40,8 +41,9 @@
               $telefono = $clientes->sanitize($_POST['telefono']);
               $direccion= $clientes->sanitize($_POST['direccion']);
               $correo_electronico = $clientes->sanitize($_POST['correo_electronico']);
-              
+              // se crea un update a la bd despues de modificar los datos
               $res = $clientes->update($nombres,$apellidos,$telefono,$direccion,$correo_electronico,$id);
+              //se manda mensaje de alerta depues de modificar el usulsario
               if ($res) {
                 $message = "Datos modificados con éxito";
                 $class = "alert alert-success";

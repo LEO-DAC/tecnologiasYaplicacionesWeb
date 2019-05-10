@@ -30,15 +30,15 @@
                 </div>
             </div>
             <?php
-            include ("database.php");
-            $clientes =  new Database();
-            if (isset($_POST) && !empty($_POST)) {
+            include ("database.php"); //se incluye la clase para crear la conexion con la bd
+            $clientes =  new Database(); //se cera instancia 
+            if (isset($_POST) && !empty($_POST)) {  //se validan los campos del formulario
               $nombres = $clientes->sanitize($_POST['nombres']);
               $apellidos = $clientes->sanitize($_POST['apellidos']);
               $telefono = $clientes->sanitize($_POST['telefono']);
               $direccion= $clientes->sanitize($_POST['direccion']);
               $correo_electronico = $clientes->sanitize($_POST['correo_electronico']);
-              
+              // se crea un usuario con in insert
               $res = $clientes->create($nombres,$apellidos,$telefono,$direccion,$correo_electronico);
               if ($res) {
                 $message = "Datos insertados con éxito";
