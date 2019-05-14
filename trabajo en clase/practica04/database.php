@@ -1,6 +1,6 @@
 <?php
 class Database{
-    public $con;
+    public  $con;
     private $dbhost="localhost";
     private $dbuser="root";
     private $dbpass="";
