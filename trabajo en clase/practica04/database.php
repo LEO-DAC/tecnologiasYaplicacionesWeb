@@ -41,9 +41,18 @@ class Database{
     public function single_record($id){
          $sql ="SELECT * FROM clientes where id='$id'";
          $res =  mysqli_query($this->con,$sql);
-         $persona = $res->fetch_assoc();
+         $persona = mysqli_fetch_object($res);
          return $persona; 
     }
+
+    public function validar($username,$password){
+        $sql ="SELECT * FROM cuentas where `username`='$username' AND `password`='$password'";
+        $res =  mysqli_query($this->con,$sql);
+        $persona = mysqli_fetch_object($res);
+        return $persona; 
+   }
+
+
 
     public function full_record(){
         $sql ="SELECT * FROM clientes";

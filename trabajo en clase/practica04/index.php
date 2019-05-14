@@ -35,6 +35,17 @@
 			<div class="title"><strong>Ninja</strong>Admin</div>
 			<!-- /.title -->
 			<div class="frm-title">Login</div>
+
+	    		<!--ALERTA DE MODIFICACION DE EQUIVOCACION EN USUARIO O CONTRASEÑA-->
+			<?php
+				if(isset($_GET['var'])){
+		 		 echo "
+				 <div class='alert alert-warning alert-dismissible' role='alert'>
+	  			 <strong>Contraseña o nombre de usuario incorrecto!</strong>
+				 </div>";
+				}
+			?>
+
 			<!-- /.frm-title -->
 			<div class="frm-input"><input type="text" name="username" placeholder="Username" class="frm-inp"><i class="fa fa-user frm-ico"></i></div>
 			<!-- /.frm-input -->
