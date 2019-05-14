@@ -53,6 +53,9 @@
                       <div class="col-sm-4">
                            <a href="create.php" class="btn btn-info"><i
                            class=""></i>Agregar cliente   <span class='glyphicon glyphicon-plus'></span></a> 
+                           <br><br> <br>           
+                          <?php echo" <a href='logout.php' class='btn btn-success'> Salir <span class='glyphicon glyphicon-off'></span></a>"?> 
+                           
                       </div>
             </div>
             <br>
