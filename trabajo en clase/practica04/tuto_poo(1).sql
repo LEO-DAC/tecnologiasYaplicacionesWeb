@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-05-2019 a las 16:35:38
+-- Tiempo de generación: 14-05-2019 a las 06:25:52
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.4
 
@@ -42,9 +42,28 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `nombres`, `apellidos`, `telefono`, `direccion`, `correo_electronico`) VALUES
-(25, 'Leonardo Daniel', 'Alonso Cepeda', '8341088876', 'nm,n,n', 'leonardo@hotmail.com'),
-(26, 'Leonardo Daniel', 'Alonso Cepeda', '8341088876', 'leodldldl', 'leonardo@hotmail.com'),
-(27, 'cdd', 'cdcd', '5454', 'scdcddc', 'leonardo@hotmail.com');
+(26, 'Leonardo Daniel', 'Alonso Cepeda', '8341088876', 'lskdfjlkdsj', 'leonardo@hotmail.com'),
+(29, 'sczcd', 'kjlkj', 'sclkajlska', 'jlkjlkjl', 'leonardo@hotmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuentas`
+--
+
+CREATE TABLE `cuentas` (
+  `password` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(15) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `cuentas`
+--
+
+INSERT INTO `cuentas` (`password`, `username`) VALUES
+('123', 'pedro'),
+('123', 'juan'),
+('leo', '321');
 
 --
 -- Índices para tablas volcadas
@@ -64,7 +83,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
