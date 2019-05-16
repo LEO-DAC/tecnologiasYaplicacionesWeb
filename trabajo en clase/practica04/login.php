@@ -59,42 +59,50 @@
                       </div>
             </div>
             <br>
-					<!-- /.dropdown js__dropdown -->
+
+     <div class="col-sm-12">   
+			<div class= "row">
+            <div class = "box-content">
+                     <!-- /.dropdown js__dropdown -->
 					<table id="example" class="table table-striped table-bordered display" style="width:80%">
-						<thead>
-							<tr>
-								<th>Nombres</th>
-								<th>Apellidos</th>
-								<th>Telefono</th>
-								<th>Dirección</th>
-                        <th>Correo eléctronico</th>
-                        <th>Eliminar</th>
-                        <th>Modificar</th>
-							</tr>
-						</thead>
-                  <tbody>        
+                     <thead>
+                        <tr>
+                           <th>Nombres</th>
+                           <th>Apellidos</th>
+                           <th>Telefono</th>
+                           <th>Dirección</th>
+                           <th>Correo eléctronico</th>
+                           <th>Eliminar</th>
+                           <th>Modificar</th>
+                        </tr>
+                     </thead>
+                     <tbody>        
+                        <?php
+                        include ("database.php");
+                        $clientes =  new Database();
+                        // consulta para cargar la tabla que muestra los usuarios
+                        $res = $clientes->full_record();
+                        
+                        foreach ($res->fetch_all(MYSQLI_ASSOC) as $value) {
+                        ?>
+                     <tr>
+                        <td><?php echo $value['nombres'];?></td>
+                        <td><?php echo $value['apellidos'];?></td>
+                        <td><?php echo $value['telefono'];?></td>
+                        <td><?php echo $value['direccion'];?></td>  
+                        <td><?php echo $value['correo_electronico'];?></td>
+                        <td> <?php echo" <a href='delete.php?id=$value[id]' onclick=' return confirmDelete()' class='btn btn-danger'> <span class='glyphicon glyphicon-trash'></span></a>";?> </td>
+                        <td> <?php echo" <a href='Modificar.php?id=$value[id]' class='btn btn-success'><span class='glyphicon glyphicon-wrench'></span></a>";?> </td>
+                     </tr>
                      <?php
-                     include ("database.php");
-                     $clientes =  new Database();
-                     // consulta para cargar la tabla que muestra los usuarios
-                     $res = $clientes->full_record();
-                     
-                     foreach ($res->fetch_all(MYSQLI_ASSOC) as $value) {
+                     }
                      ?>
-                   <tr>
-                     <td><?php echo $value['nombres'];?></td>
-                     <td><?php echo $value['apellidos'];?></td>
-                     <td><?php echo $value['telefono'];?></td>
-                     <td><?php echo $value['direccion'];?></td>  
-                     <td><?php echo $value['correo_electronico'];?></td>
-                     <td> <?php echo" <a href='delete.php?id=$value[id]' onclick=' return confirmDelete()' class='btn btn-danger'> <span class='glyphicon glyphicon-trash'></span></a>"?> </td>
-                     <td> <?php echo" <a href='Modificar.php?id=$value[id]' class='btn btn-success'><span class='glyphicon glyphicon-wrench'></span></a>"?> </td>
-                  </tr>
-                  <?php
-                   }
-                  ?>
-                  </tbody>
-					</table>
+                     </tbody>
+                  </table>
+                </div> 
+            </div>
+         </div>	
+            	
         </div>
    </div>
 		  

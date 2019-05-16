@@ -6,7 +6,7 @@
 
 	//se valida si el estado de la sesion esta activo y redirige al index de administrador 
 	if($estado){
-		header("location:index.php");
+		header("location:login.php");
 	}
 ?>
 
