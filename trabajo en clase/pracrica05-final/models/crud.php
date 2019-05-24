@@ -12,13 +12,14 @@ class Datos extends Conexion{
 
 		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (username, password) VALUES (:username,:password)");	
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (username, password,admin) VALUES (:username,:password,:admin)");	
 
 		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
 
 		$stmt->bindParam(":username", $datosModel["username"], PDO::PARAM_STR);
 		$stmt->bindParam(":password", $datosModel["password"], PDO::PARAM_STR);
-
+		$stmt->bindParam("admin", $datosModel["admin"], PDO::PARAM_BOOL);
+		
 		if($stmt->execute()){
 
 			return "success";
@@ -34,9 +35,10 @@ class Datos extends Conexion{
 		$stmt->close();
 
 	}
+
 	#REGISTRO DE PRODUCTO
 	#-------------------------------------
-	public function registroProductoModel($datosModel, $tabla){
+	public function registroAdminModel($datosModel, $tabla){
 
 		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
 
