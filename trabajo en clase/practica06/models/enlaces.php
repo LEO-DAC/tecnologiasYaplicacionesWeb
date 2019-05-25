@@ -6,7 +6,7 @@ class Paginas{
 
 
 		if($enlaces == "ingresar" || $enlaces == "crudHabitacion" || $enlaces=="crudCliente" || $enlaces=="listar"|| $enlaces == "usuarios" || $enlaces == "salir" ||
-		    $enlaces=="login" || $enlaces=="session_destroy"){
+		    $enlaces=="login" || $enlaces=="session_destroy" || $enlaces=="consultarHabitacion" || $enlaces=="generarReservacion"){
 
 			$module =  "views/modules/".$enlaces.".php";
 		}

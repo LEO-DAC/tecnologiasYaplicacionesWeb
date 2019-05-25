@@ -58,15 +58,15 @@
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-hotel"></i><span>Habitaciones</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
 							<li><a href="index.php?action=listar">Listar</a></li>
-							<li><a href="">consultar</a></li>
+							<li><a href="index.php?action=consultarHabitacion">consultar</a></li>
 						</ul>
 						<!-- /.sub-menu js__content -->
 					</li>
 					 <li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-calendar"></i><span>Reservaciones</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
-							<li><a href="">Generar</a></li>
-							<li><a href="">consultar</a></li>	
+							<li><a href="index.php?action=generarReservacion">Generar</a></li>
+							<li><a href="index.php?action=consultarReservacion">consultar</a></li>	
 						</ul>
 						<!-- /.sub-menu js__content -->
 					</li>

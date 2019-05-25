@@ -1,5 +1,4 @@
-<?php echo "dentro de links inferiores";?>
-<script src="views/modules/assets/scripts/jquery.min.js"></script>
+    <script src="views/modules/assets/scripts/jquery.min.js"></script>
 	<script src="views/modules/assets/scripts/modernizr.min.js"></script>
 	<script src="views/modules/assets/plugin/bootstrap/js/bootstrap.min.js"></script>
 	<script src="views/modules/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -30,7 +29,21 @@
 	<script src="views/modules/assets/plugin/datatables/extensions/Responsive/js/responsive.bootstrap.min.js"></script>
 	<script src="views/modules/assets/scripts/datatables.demo.min.js"></script>
 
-
-
 	<script src="views/modules/assets/scripts/sweetalert.init.min.js"></script>
 
+	<script src="views/modules/assets/plugin/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
+	<script src="views/modules/assets/scripts/x-editable.demo.min.js"></script>
+
+	<!-- Datepicker -->
+	<script src="views/modules/assets/plugin/datepicker/js/bootstrap-datepicker.min.js"></script
+
+
+	<!-- DateRangepicker -->
+	<script src="views/modules/assets/plugin/daterangepicker/daterangepicker.js"></script>
+
+	<!-- Maxlength -->
+	<script src="views/modules/assets/plugin/maxlength/bootstrap-maxlength.min.js"></script>
+
+	<!-- Demo Scripts -->
+	<script src="views/modules/assets/scripts/form.demo.min.js"></script>

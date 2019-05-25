@@ -7,12 +7,14 @@
 	  <div class="card-content">
     <form class="form-horizontal" method="post">
         <div class="col-sm-10">
-           <select name="tipo" class="form-control">
-             <option >Nada seleccionado</option>
+          <label>selecciona el tipo de cliente:</label> 
+           <select name="tipo" class="form-control" required>
              <option >habitual</option>
              <option >esporádico</option>
            </select><br>
-           <input id="ig-1" type="text" name="nombre" class="form-control" placeholder="nombre">
+           <input id="ig-1" type="text" name="nombre" class="form-control" placeholder="nombre" required>
+           <br>
+            <input id="ig-1" type="text" name="apellido" class="form-control" placeholder="apellido" required>
            <br>
            <button type="submit" name ="registrar"class="btn btn-primary btn-sm waves-effect waves-light">Registrar</button>
            <br><br><br>
@@ -40,6 +42,7 @@
                 <th>id</th>
                 <th>tipo</th>
                 <th>nombre</th>
+                <th>apellido</th>
                 <th>Actualizar</th>
                 <th>Eliminar</th>
               </tr>

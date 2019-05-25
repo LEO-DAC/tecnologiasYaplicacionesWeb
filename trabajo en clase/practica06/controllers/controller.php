@@ -131,7 +131,8 @@ class MvcController{
 		if(isset($_POST["registrar"])){
 
 			$datosController = array( "tipo"=>$_POST["tipo"], 
-									  "nombre"=>$_POST["nombre"]
+									  "nombre"=>$_POST["nombre"],
+									  "apellido"=>$_POST["apellido"]
 									);
 
 			$respuesta = Datos::registroClienteModel($datosController, "cliente");
@@ -152,28 +153,38 @@ class MvcController{
 	}
 
 
-	#REGISTRO DE PRODUCTOS
+	#REGISTRO DE RESERVACIÓN
 	#------------------------------------
-	public function registroProductoController(){
+	public function registroReservacionController(){
 
-	  if(isset($_POST["nombreRegistro"])){
-	  	  $datosController = array( "nombre"=>$_POST["nombreRegistro"], 
-		                          "precio"=>$_POST["precioRegistro"]);
+		if(isset($_POST["registrar"])){
+			
+			$datosController = array( "idCliente"=>$_POST["idCliente"], 
+									  "idHabitacion"=>$_POST["idHabitacion"],
+									  "fechaEntrada"=>$_POST["fechaEntrada"],
+									  "dias"=>$_POST["dias"]
+									);
 
-          $respuesta = Datos::registroProductoModel($datosController, "productos");
+			$respuesta = Datos::registroReservacionModel($datosController, "reservacion");
 
-          if($respuesta == "success"){
+			if($respuesta == "success"){
 
-             header("location:index.php?action=ok");
-        }
-        else{
-            header("location:index.php");
-	     }
+			    $URL="index.php?action=generarReservacion";
+			    echo "<script >document.location.href='{$URL}';</script>";
+			    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 
-	 }
+			$salida="sal-success";
+			return $salida;	
+			}
+
+			else{
+
+			//	header("location:index.php");
+			}
+
+		}
 
 	}
-
 
 	#INGRESO DE USUARIOS
 	#------------------------------------
@@ -211,7 +222,11 @@ class MvcController{
 
 	public function vistaHabitacionesController(){
 
-		$respuesta = Datos::vistaHabitacionesModel("habitacion");
+	    if(isset($_POST['listar'])){
+	    	$respuesta = Datos::vistaHabitacionesModel("habitacion",$_POST['tipo']);
+	    }else{
+		    $respuesta = Datos::vistaHabitacionesModel("habitacion",false);
+        }
 
 		#El constructor foreach proporciona un modo sencillo de iterar sobre arrays. foreach funciona sólo sobre arrays y objetos, y emitirá un error al intentar usarlo con una variable de un tipo diferente de datos o una variable no inicializada.
 
@@ -223,19 +238,60 @@ class MvcController{
 		<?php if($item["disponible"]==1){
 				echo "<td>si</td>";
 		}else{
-			    echo "<td>no</td>";
-		}?>
-		<?php echo'
-				<td>'.'$'.$item["precio"].'</td>
+			    echo '<td>no</td>';
+		}
+		 echo '<td>'.'$'.$item["precio"].'</td>';
+		?>
+		<?php if($_SESSION['id_usuario']['admin']==1){ echo'
 				<td><center><a href="index.php?action=editar&id='.$item["id"].'"><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
 
-				<td><center><a href="index.php?action=crudHabitacion&idBorrar='.$item["id"].'"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
-			</tr>';
-
-		}
+				<td><center><a href="index.php?action=crudHabitacion&idBorrar='.$item["id"].'" onclick="return confirmDeleteHabitacion()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
+		    ';}?>
+		    		
+			<?php echo'</tr>';
+		 }
 
 	}
 
+
+
+
+
+	#VISTA DE HABITACIONES
+	#------------------------------------
+
+	public function vistaHabitacionesPrecioController(){
+
+	    if(isset($_POST['consultar'])){
+	    	$respuesta = Datos::vistaHabitacionesPrecioModel("habitacion",$_POST['minimo'],$_POST['maximo']);
+	    }else{
+		    $respuesta = Datos::vistaHabitacionesModel("habitacion",false);
+        }
+
+		#El constructor foreach proporciona un modo sencillo de iterar sobre arrays. foreach funciona sólo sobre arrays y objetos, y emitirá un error al intentar usarlo con una variable de un tipo diferente de datos o una variable no inicializada.
+
+		foreach($respuesta as $row => $item){
+		echo'<tr>
+				<td>'.$item["id"].'</td>
+				<td>'.$item["tipo"].'</td>
+		';?>
+		<?php if($item["disponible"]==1){
+				echo "<td>si</td>";
+		}else{
+			    echo '<td>no</td>';
+		}
+		 echo '<td>'.'$'.$item["precio"].'</td>';
+		?>
+		<?php if($_SESSION['id_usuario']['admin']==1){ echo'
+				<td><center><a href="index.php?action=editar&id='.$item["id"].'"><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
+
+				<td><center><a href="index.php?action=crudHabitacion&idBorrar='.$item["id"].'" onclick="return confirmDeleteHabitacion()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
+		    ';}?>
+		    		
+			<?php echo'</tr>';
+		 }
+
+	}
 
 
 	#VISTA DE CLIENTES
@@ -253,78 +309,33 @@ class MvcController{
 				<td>'.$item["id"].'</td>
 				<td>'.$item["tipo"].'</td>
 				<td>'.$item["nombre"].'</td>
-				<td><center><a href="index.php?action=editar&id='.$item["id"].'"><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
+				<td>'.$item["apellido"].'</td>
+				<td><center><a href="index.php?action=editar&id='.$item["id"].'" ><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
 
-				<td><center><a href="index.php?action=crudHabitacion&idBorrar='.$item["id"].'"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
+				<td><center><a href="index.php?action=crudCliente&idBorrar='.$item["id"].'" onclick="return confirmDeleteCliente()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
 			</tr>';
 
 		}
 
 	}
 
+	//funcion para llenar el campo select del formulario de reservacion y mostrar el nombre del cliente
+	public function MostrarClientesController(){
 
-
-	
-	#VISTA DE PRODUCTOS
-	#------------------------------------
-
-	public function vistaProductosController(){
-
-		$respuesta = Datos::vistaProductosModel("productos");
-
-		#El constructor foreach proporciona un modo sencillo de iterar sobre arrays. foreach funciona sólo sobre arrays y objetos, y emitirá un error al intentar usarlo con una variable de un tipo diferente de datos o una variable no inicializada.
-
+		$respuesta = Datos::vistaClientesModel("cliente");
 		foreach($respuesta as $row => $item){
-		echo'<tr>
-				<td>'.$item["nombre"].'</td>
-				<td>'.$item["precio"].'</td>
-				<td><a href="index.php?action=editarProd&id='.$item["id"].'"><button>Editar</button></a></td>
-				<td><a href="index.php?action=productos&idBorrar='.$item["id"].'"><button>Borrar</button></a></td>
-			</tr>';
-
+		     echo'<option value ='.$item['id'].'>'.$item['nombre'].' '.$item['apellido'].'</option>';
 		}
-
 	}
 
 
-		
-	#VISTA DE PRODUCTOS PARA VENTA
-	#------------------------------------
+    //función para llenar el campo select del formulario reservacion y mostrar las habitaciones disponibles
+	public function MostrarHabitacionesController(){
 
-	public function vistaVentaProductosController(){
-
-		$respuesta = Datos::vistaProductosModel("productos");
-
-		#El constructor foreach proporciona un modo sencillo de iterar sobre arrays. foreach funciona sólo sobre arrays y objetos, y emitirá un error al intentar usarlo con una variable de un tipo diferente de datos o una variable no inicializada.
-		echo "<form method='post'>";
-		echo "	<select name='productos'>";
+		$respuesta = Datos::vistaHabitacionesDisponiblesModel("habitacion");
 		foreach($respuesta as $row => $item){
-		echo'<tr>
-				<option>'.$item["nombre"].' $'.$item["precio"].'</option>';
-				$arr[$item["nombre"]] = $item["id"];
+		     echo'<option value ='.$item['id'].'>'.$item['tipo'].' $'.$item['precio'].'</option>';
 		}
-		echo'</select>';
-        echo '<input type="submit" value="comprar">';
-        echo "</form>";
-
-
-		
-		if(isset($_POST["productos"])){
-	  	  $datosController = array( "id_producto"=>$arr[$item["nombre"]]);
-
-			echo "".$datosController["id_producto"];
-          $respuesta = Datos::registroProductoVentaModel($datosController, "venta");
-
-          if($respuesta == "success"){
-
-             header("location:index.php?action=ok");
-        }
-        else{
-            header("location:index.php");
-	     }
-
-	 }
-
 	}
 
 
@@ -439,7 +450,10 @@ class MvcController{
 
 			if($respuesta == "success"){
 
-				//header("location:index.php?action=usuarios");
+			    $URL="index.php?action=crudCliente";
+			    echo "<script >document.location.href='{$URL}';</script>";
+			    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+				//header("location:index.php?action=crudCliente");
 			
 			}
 
@@ -460,8 +474,10 @@ class MvcController{
 
 			if($respuesta == "success"){
 
-			//	header("location:index.php?action=usuarios");
-			
+			    $URL="index.php?action=crudHabitacion";
+			    echo "<script >document.location.href='{$URL}';</script>";
+			    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+		
 			}
 
 		}

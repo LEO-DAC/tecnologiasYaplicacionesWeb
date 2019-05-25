@@ -7,13 +7,13 @@
 	  <div class="card-content">
     <form class="form-horizontal" method="post">
         <div class="col-sm-10">
-           <select name="tipo" class="form-control">
-             <option >Nada seleccionado</option>
+          <label>selecciona el tipo de habitación:</label>
+           <select name="tipo" class="form-control" required>
              <option >simple</option>
              <option >doble</option>
              <option >matrimonial</option>
            </select><br>
-           <input id="ig-1" type="number" name="precio" class="form-control" placeholder="precio">
+           <input id="ig-1" type="number"  min="1" name="precio" class="form-control" placeholder="precio" required>
            <br>
            <button type="submit" name ="registrar"class="btn btn-primary btn-sm waves-effect waves-light">Registrar</button><br><br><br>
         </div>

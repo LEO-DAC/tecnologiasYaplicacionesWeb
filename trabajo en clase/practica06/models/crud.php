@@ -103,6 +103,52 @@ class Datos extends Conexion{
 
 
 
+	#REGISTRO DE RESERVACIONES
+	#-------------------------------------
+	public function registroReservacionModel($datosModel, $tabla){
+
+		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (idCliente, idHabitacion,fechaEntrada,dias) VALUES (:idCliente, :idHabitacion,:fechaEntrada,:dias)");	
+
+		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
+
+		$stmt->bindParam(":idCliente", $datosModel["idCliente"], PDO::PARAM_INT);
+		$stmt->bindParam(":idHabitacion", $datosModel["idHabitacion"], PDO::PARAM_INT);
+		$stmt->bindParam(":fechaEntrada", $datosModel["fechaEntrada"], PDO::PARAM_STR);
+		$stmt->bindParam(":dias", $datosModel["dias"], PDO::PARAM_INT);
+		
+		if($stmt->execute()){
+			//se cambia el estado del 		
+			$stmt2 = Conexion::conectar()->prepare("UPDATE habitacion SET disponible=0 WHERE id=:idHabitacion");
+			$stmt2->bindParam(":idHabitacion", $datosModel["idHabitacion"], PDO::PARAM_INT);
+		
+			
+			if($stmt2->execute()){
+				return "success";
+			}
+		
+			$stmt2->close();
+
+
+			return "success";
+
+		}
+
+		else{
+
+			return "error";
+
+		}
+
+		$stmt->close();
+
+	}
+
+
+
+
+
 
 	#REGISTRO DE CLIENTES
 	#-------------------------------------
@@ -110,12 +156,13 @@ class Datos extends Conexion{
 
 		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (tipo, nombre) VALUES (:tipo,:nombre)");	
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (tipo, nombre,apellido) VALUES (:tipo,:nombre,:apellido)");	
 
 		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
 
 		$stmt->bindParam(":tipo", $datosModel["tipo"], PDO::PARAM_STR);
 		$stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":apellido", $datosModel["apellido"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
 
@@ -136,9 +183,47 @@ class Datos extends Conexion{
 	#VISTA HABITACION
 	#-------------------------------------
 
-	public function vistaHabitacionesModel($tabla){
+	public function vistaHabitacionesModel($tabla,$tipo){
+        if($tipo==false){
+			$stmt = Conexion::conectar()->prepare("SELECT id, tipo, disponible, precio FROM $tabla");	
+		}else{
+			$stmt = Conexion::conectar()->prepare("SELECT id, tipo, disponible, precio FROM $tabla WHERE tipo='$tipo'");	
+		}
+		$stmt->execute();
 
-		$stmt = Conexion::conectar()->prepare("SELECT id, tipo, disponible, precio FROM $tabla");	
+		#fetchAll(): Obtiene todas las filas de un conjunto de resultados asociado al objeto PDOStatement. 
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+	}
+
+
+
+
+	#VISTA HABITACION DISPONIBLE
+	#-------------------------------------
+
+	public function vistaHabitacionesDisponiblesModel($tabla){
+      
+		$stmt = Conexion::conectar()->prepare("SELECT id, tipo, disponible, precio FROM $tabla WHERE disponible=1 ");	
+	
+		$stmt->execute();
+
+		#fetchAll(): Obtiene todas las filas de un conjunto de resultados asociado al objeto PDOStatement. 
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+	}
+
+
+
+	#VISTA HABITACION PRECIO
+	#-------------------------------------
+
+	public function vistaHabitacionesPrecioModel($tabla,$minimo,$maximo){
+		$stmt = Conexion::conectar()->prepare("SELECT id, tipo, disponible, precio FROM $tabla WHERE precio>=$minimo and precio<=$maximo");	
 		$stmt->execute();
 
 		#fetchAll(): Obtiene todas las filas de un conjunto de resultados asociado al objeto PDOStatement. 
@@ -154,7 +239,7 @@ class Datos extends Conexion{
 
 	public function vistaClientesModel($tabla){
 
-		$stmt = Conexion::conectar()->prepare("SELECT id, tipo, nombre FROM $tabla");	
+		$stmt = Conexion::conectar()->prepare("SELECT id, tipo, nombre,apellido FROM $tabla");	
 		$stmt->execute();
 
 		#fetchAll(): Obtiene todas las filas de un conjunto de resultados asociado al objeto PDOStatement. 

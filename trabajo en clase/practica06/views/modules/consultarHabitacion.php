@@ -3,13 +3,16 @@
 		<div class="box-content">
 			<div class="form-group margin-bottom-20">
 			<form method="post">	
-			   <select name="tipo" class="form-control">
-					<option >Nada seleccionado</option>
-					<option >simple</option>
-					<option >doble</option>
-					<option >matrimonial</option>
-			   </select><br><br>
-			   <button type="submit" name ="listar"class="btn btn-primary btn-sm waves-effect waves-light">listar</button>
+
+
+           <p>precio minimo y maximo:</p>
+            <div class="col-md-4 margin-bottom-20">
+              <input id="demo2" type="number" value="0" min="0" name="minimo" class="col-md-8 form-control" required>
+            </div>  
+            <div class="col-md-4 margin-bottom-20">
+              <input id="demo2" type="number" value="0" min="0" name="maximo" class="col-md-8 form-control" required>
+            </div>
+			      <button type="submit" name ="consultar"class="btn btn-primary btn-sm waves-effect waves-light">consultar</button>
 			 </form>
 			</div>
 			</select><br><br><br>
@@ -33,7 +36,7 @@
             <tbody>
              <?php   
                      $controlador = new MvcController();
-                     $controlador->vistaHabitacionesController();
+                     $controlador->vistaHabitacionesPrecioController();
              ?>   
            </tbody>
       </table>
