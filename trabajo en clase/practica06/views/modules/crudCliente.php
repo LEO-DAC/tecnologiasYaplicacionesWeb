@@ -48,7 +48,7 @@
               </tr>
             </thead>
             <tbody>
-             <?php   
+             <?php   //
                      $controlador = new MvcController();
                      $controlador->vistaClientesController();
                      $controlador->borrarClienteController();
