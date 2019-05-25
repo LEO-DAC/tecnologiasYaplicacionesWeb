@@ -5,8 +5,8 @@ class Paginas{
 	public function enlacesPaginasModel($enlaces){
 
 
-		if($enlaces == "ingresar" || $enlaces == "crudHabitacion" || $enlaces=="crudCliente" || $enlaces=="listar"|| $enlaces == "usuarios" || $enlaces == "salir" ||
-		    $enlaces=="login" || $enlaces=="session_destroy" || $enlaces=="consultarHabitacion" || $enlaces=="generarReservacion"){
+		if($enlaces == "ingresar" || $enlaces == "crudHabitacion" || $enlaces=="crudCliente" || $enlaces=="listar"|| $enlaces == "usuarios" || $enlaces == "salir" || $enlaces=="login" || $enlaces=="session_destroy" || $enlaces=="consultarHabitacion" || $enlaces=="generarReservacion" || 
+			 $enlaces=="consultarReservacion"){
 
 			$module =  "views/modules/".$enlaces.".php";
 		}

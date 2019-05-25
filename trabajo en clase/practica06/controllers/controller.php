@@ -255,6 +255,39 @@ class MvcController{
 
 
 
+	#VISTA DE RESERVACIONES
+	#------------------------------------
+
+	public function vistaReservacionesController(){
+
+	    	$respuesta = Datos::vistaReservacionesModel("reservacion");
+	   
+
+		#El constructor foreach proporciona un modo sencillo de iterar sobre arrays. foreach funciona sólo sobre arrays y objetos, y emitirá un error al intentar usarlo con una variable de un tipo diferente de datos o una variable no inicializada.
+
+		foreach($respuesta as $row => $item){
+		echo'<tr>
+				<td>'.$item["id"].'</td>
+				<td>'.$item["idCliente"].'</td>
+				<td>'.$item["idHabitacion"].'</td>
+				<td>'.$item["fechaEntrada"].'</td>
+				<td>'.$item["dias"].'</td>		
+		';
+		?>
+		<?php echo'
+				<td><center><a href="index.php?action=editar&id='.$item["id"].'"><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
+
+				<td><center><a href="index.php?action=consultarReservacion&idBorrar='.$item["id"].'&idHabitacion='.$item["idHabitacion"].'" onclick="return confirmDeleteHabitacion()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
+		    ';?>
+		    		
+			<?php echo'</tr>';
+		 }
+
+	}
+
+
+
+
 
 
 	#VISTA DE HABITACIONES
@@ -483,6 +516,31 @@ class MvcController{
 		}
 
 	}
+
+
+	#BORRAR RESERVACION
+	#------------------------------------
+	public function borrarReservacionController(){
+
+		if(isset($_GET["idBorrar"])){
+
+			$datosController = array( "idBorrar"=>$_GET["idBorrar"], 
+								      "idHabitacion"=>$_GET["idHabitacion"]);
+
+			$respuesta = Datos::borrarReservacionModel($datosController, "reservacion");
+
+			if($respuesta == "success"){
+
+			    $URL="index.php?action=consultarReservacion";
+			    echo "<script >document.location.href='{$URL}';</script>";
+			    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+		
+			}
+
+		}
+
+	}
+
 
 }
 

@@ -200,6 +200,23 @@ class Datos extends Conexion{
 
 
 
+	#VISTA RESERVACION
+	#-------------------------------------
+
+	public function vistaReservacionesModel($tabla){
+     
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");	
+		
+		$stmt->execute();
+
+		#fetchAll(): Obtiene todas las filas de un conjunto de resultados asociado al objeto PDOStatement. 
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+	}
+
+
 
 	#VISTA HABITACION DISPONIBLE
 	#-------------------------------------
@@ -292,6 +309,41 @@ class Datos extends Conexion{
 
 		if($stmt->execute()){
 
+			return "success";
+
+		}
+
+		else{
+
+			return "error";
+
+		}
+
+		$stmt->close();
+
+	}
+
+
+
+	#BORRAR RESERVACION
+	#------------------------------------
+	public function borrarReservacionModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+		$stmt->bindParam(":id", $datosModel["idBorrar"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+
+			$stmt2 = Conexion::conectar()->prepare("UPDATE habitacion SET disponible=1 WHERE id=:idHabitacion");
+			$stmt2->bindParam(":idHabitacion", $datosModel["idHabitacion"], PDO::PARAM_INT);
+		
+			
+			if($stmt2->execute()){
+				return "success";
+			}
+		
+			$stmt2->close();
 			return "success";
 
 		}
