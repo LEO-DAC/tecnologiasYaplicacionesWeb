@@ -53,6 +53,62 @@ class Datos extends Conexion{
 
 
 
+	#EDITAR CLIENTE
+	#-------------------------------------
+
+	public function editarClienteModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id = :id");
+		$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);	
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+
+	}
+
+
+	#EDITAR CLIENTE
+	#-------------------------------------
+
+	public function editarReservacionModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id = :id");
+		$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);	
+		$stmt->execute();
+
+		
+
+
+		$stmt2 = Conexion::conectar()->prepare("UPDATE habitacion SET disponible=1 WHERE id=:idHabitacion");
+		$stmt2->bindParam(":idHabitacion", $datosModel["idHabitacion"], PDO::PARAM_INT);
+		$stmt2->execute();
+		
+		return $stmt->fetch();
+		
+		$stmt2->close();
+		
+		$stmt->close();
+	
+		
+	}
+
+	#EDITAR HABITACION
+	#-------------------------------------
+
+	public function editarHabitacionModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id = :id");
+		$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);	
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+
+	}
+
 	#INGRESO USUARIO
 	#-------------------------------------
 	public function ingresoUsuarioModel($datosModel, $tabla){
@@ -69,6 +125,80 @@ class Datos extends Conexion{
     }
 
 
+	#ACTUALIZAR CLIENTE
+	#-------------------------------------
+
+	public function actualizarClienteModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET tipo=:tipo, nombre = :nombre, apellido = :apellido WHERE id = :id");
+		
+		$stmt->bindParam(":tipo", $datosModel["tipo"], PDO::PARAM_STR);
+		$stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":apellido", $datosModel["apellido"], PDO::PARAM_STR);
+		$stmt->bindParam(":id", $datosModel["id"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+			return "success";
+		}
+		else{
+			return "error";
+		}
+
+		$stmt->close();
+
+	}	
+
+
+
+	#ACTUALIZAR RESERVACION
+	#-------------------------------------
+
+	public function actualizarReservacionModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET idCliente=:idCliente, idHabitacion = :idHabitacion, fechaEntrada = :fechaEntrada, dias=:dias WHERE id = :id");
+		
+		$stmt->bindParam(":idCliente", $datosModel["idCliente"], PDO::PARAM_INT);
+		$stmt->bindParam(":idHabitacion", $datosModel["idHabitacion"], PDO::PARAM_INT);
+		$stmt->bindParam(":fechaEntrada", $datosModel["fechaEntrada"], PDO::PARAM_STR);
+		$stmt->bindParam(":dias", $datosModel["dias"], PDO::PARAM_INT);
+		$stmt->bindParam(":id", $datosModel["id"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+			return "success";
+		}
+		else{
+			return "error";
+		}
+
+		$stmt->close();
+
+	}	
+
+
+
+
+	#ACTUALIZAR HABITACION
+	#-------------------------------------
+
+	public function actualizarHabitacionModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET tipo=:tipo, disponible = :disponible, precio = :precio WHERE id = :id");
+		
+		$stmt->bindParam(":tipo", $datosModel["tipo"], PDO::PARAM_STR);
+		$stmt->bindParam(":disponible", $datosModel["disponible"], PDO::PARAM_STR);
+		$stmt->bindParam(":precio", $datosModel["precio"], PDO::PARAM_INT);
+		$stmt->bindParam(":id", $datosModel["id"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+			return "success";
+		}
+		else{
+			return "error";
+		}
+
+		$stmt->close();
+
+	}	
 
 	#REGISTRO DE HABITACIONES
 	#-------------------------------------

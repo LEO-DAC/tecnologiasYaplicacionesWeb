@@ -20,10 +20,6 @@ class MvcController{
 			$respuesta = $datos->login($datos_usuario);
 			if(!empty($respuesta)){
 				$_SESSION['id_usuario']= $respuesta;					
-//				$_SESSION['id_usuario'][]=$respuesta['username'];
-//				$_SESSION['id_usuario'][]=$respuesta['admin'];
-
-				#header('location:index.php?action=dashboard');
 			    $URL="index.php?action=listar";
 			    echo "<script >document.location.href='{$URL}';</script>";
 			    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
@@ -34,6 +30,245 @@ class MvcController{
 			    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 			}
 		}
+	}
+
+
+
+
+	#EDITAR CLIENTE
+	#------------------------------------
+
+	public function editarClienteController(){
+
+		$datosController = $_GET["id"];
+		$respuesta = Datos::editarClienteModel($datosController, "cliente");
+
+		echo'
+		<div class="wrapper">
+		 <div class="main-content">
+		  <div class="box-content">
+		   <div class="form-group margin-bottom-20">
+		     <h4 class="box-title">Editar Cliente</h4> 
+			<form method="post">	
+
+		     <input type="hidden" value="'.$respuesta["id"].'" name="idEditar">
+
+             <label>selecciona el tipo de cliente:</label> 
+             <select name="tipoEditar" class="form-control" required>
+             <option >habitual</option>
+             <option >esporádico</option>
+             </select><br>
+
+			 <input type="text" value="'.$respuesta["nombre"].'" name="nombreEditar" id="ig-1"  class="form-control" required>
+
+			 <input type="text" value="'.$respuesta["apellido"].'" name="apellidoEditar" id="ig-1"  class="form-control" required>
+			 <br><br>	
+			 <input type="submit" value="Actualizar" name="actualizar" class="btn btn-primary btn-sm waves-effect waves-light">
+		   </div>
+		  </div>
+		 </div>
+	   </div>';
+
+	}
+
+
+	#EDITAR HABITACION
+	#------------------------------------
+
+	public function editarHabitacionController(){
+
+		$datosController = $_GET["id"];
+		$respuesta = Datos::editarHabitacionModel($datosController, "habitacion");
+
+		echo'
+		<div class="wrapper">
+		 <div class="main-content">
+		  <div class="box-content">
+		   <div class="form-group margin-bottom-20">
+		     <h4 class="box-title">Editar Habitacion</h4> 
+			<form method="post">	
+
+		     <input type="hidden" value="'.$respuesta["id"].'" name="idEditar">
+
+	          <label>selecciona el tipo de habitación:</label>
+	           <select name="tipoEditar" class="form-control" required>
+	             <option >simple</option>
+	             <option >doble</option>
+	             <option >matrimonial</option>
+	           </select><br>
+
+			 <input id="ig-1" type="number" value="'.$respuesta["disponible"].'" min="0" max="1" name="disponibleEditar" class="form-control"  required>
+
+			 <input id="ig-1" type="number" value="'.$respuesta["precio"].'" min="1" name="precioEditar" class="form-control"  required>
+
+			 <input type="submit" value="Actualizar" name="actualizar" class="btn btn-primary btn-sm waves-effect waves-light">
+		   </div>
+		  </div>
+		 </div>
+	   </div>';
+
+	}
+
+
+
+
+	#EDITAR RESERVACION
+	#------------------------------------
+
+	public function editarReservacionController(){
+
+			$datosController = array( "id"=>$_GET["id"],
+							          "idHabitacion"=>$_GET["idHabitacion"]);
+
+		$respuesta = Datos::editarReservacionModel($datosController, "reservacion");
+
+		echo'
+		<div class="wrapper">
+		 <div class="main-content">
+		  <div class="box-content">
+		   <div class="form-group margin-bottom-20">
+		     <h4 class="box-title">Editar Habitacion</h4> 
+			<form method="post">	
+
+		     <input type="hidden" value="'.$respuesta["id"].'" name="idEditar">
+
+                     <select name="idClienteEditar" class="form-control">';
+                       
+                        
+                          $this->MostrarClientesController();
+                         
+		echo '
+                     </select><br>
+		             <select name="idHabitacionEditar" class="form-control">';
+                       $this->MostrarHabitacionesController();
+                       
+		echo'
+                     </select><br>
+
+
+                      <div class="form-group">
+                        <label class="control-label col-sm-4">Fecha de llegada</label>
+                        <div class="col-sm-8">
+                          <div class="input-group">
+                            <input required  name="fechaEntradaEditar" type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker-autoclose">
+                            <span class="input-group-addon bg-primary text-white"><i class="fa fa-calendar"></i></span>
+                          </div>
+                        </div>
+                      </div>
+                  
+                     <div class="col-sd-10 margin-bottom-20">
+                      <p>dias: </p><input  type="number" value="'.$respuesta["id"].'" name="diasEditar" class="col-md-8 form-control" required  min="1" max="100" >
+
+			 <input type="submit" value="Actualizar" name="actualizar" class="btn btn-primary btn-sm waves-effect waves-light">
+		   </div>
+		  </div>
+		 </div>
+	   </div>';
+
+	}
+
+
+
+
+	#ACTUALIZAR RESERVACION
+	#------------------------------------
+	public function actualizarReservacionController(){
+
+		if(isset($_POST["actualizar"])){
+
+			$datosController = array( "id"=>$_POST["idEditar"],
+							          "idCliente"=>$_POST["idClienteEditar"],
+							          "idHabitacion"=>$_POST["idHabitacionEditar"],
+				                      "fechaEntrada"=>$_POST["fechaEntradaEditar"],
+				                  	  "dias"=>$_POST["diasEditar"]);
+			
+			$respuesta = Datos::actualizarReservacionModel($datosController, "reservacion");
+
+			if($respuesta == "success"){
+
+			    $URL="index.php?action=consultarReservacion";
+			    echo "<script >document.location.href='{$URL}';</script>";
+			    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+				//header("location:index.php?action=crudCliente");
+
+			}
+
+			else{
+
+				echo "error";
+
+			}
+
+		}
+	
+	}
+
+
+
+
+
+
+	#ACTUALIZAR CLIENTE
+	#------------------------------------
+	public function actualizarClienteController(){
+
+		if(isset($_POST["actualizar"])){
+
+
+			
+			$respuesta = Datos::actualizarClienteModel($datosController, "cliente");
+
+			if($respuesta == "success"){
+
+			    $URL="index.php?action=crudCliente";
+			    echo "<script >document.location.href='{$URL}';</script>";
+			    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+				//header("location:index.php?action=crudCliente");
+
+			}
+
+			else{
+
+				echo "error";
+
+			}
+
+		}
+	
+	}
+
+
+
+
+	#ACTUALIZAR HABITACION
+	#------------------------------------
+	public function actualizarHabitacionController(){
+
+		if(isset($_POST["actualizar"])){
+
+			$datosController = array( "id"=>$_POST["idEditar"],
+							          "tipo"=>$_POST["tipoEditar"],
+							          "disponible"=>$_POST["disponibleEditar"],
+				                      "precio"=>$_POST["precioEditar"]);
+			
+			$respuesta = Datos::actualizarHabitacionModel($datosController, "habitacion");
+
+			if($respuesta == "success"){
+
+			    $URL="index.php?action=crudHabitacion";
+			    echo "<script >document.location.href='{$URL}';</script>";
+			    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
+			}
+
+			else{
+
+				echo "error";
+
+			}
+
+		}
+	
 	}
 
 
@@ -243,7 +478,7 @@ class MvcController{
 		 echo '<td>'.'$'.$item["precio"].'</td>';
 		?>
 		<?php if($_SESSION['id_usuario']['admin']==1){ echo'
-				<td><center><a href="index.php?action=editar&id='.$item["id"].'"><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
+				<td><center><a href="index.php?action=editarHabitacion&id='.$item["id"].'"><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
 
 				<td><center><a href="index.php?action=crudHabitacion&idBorrar='.$item["id"].'" onclick="return confirmDeleteHabitacion()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
 		    ';}?>
@@ -275,7 +510,7 @@ class MvcController{
 		';
 		?>
 		<?php echo'
-				<td><center><a href="index.php?action=editar&id='.$item["id"].'"><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
+				<td><center><a href="index.php?action=editarReservacion&id='.$item["id"].'&idHabitacion='.$item["idHabitacion"].'"><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
 
 				<td><center><a href="index.php?action=consultarReservacion&idBorrar='.$item["id"].'&idHabitacion='.$item["idHabitacion"].'" onclick="return confirmDeleteHabitacion()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
 		    ';?>
@@ -343,7 +578,7 @@ class MvcController{
 				<td>'.$item["tipo"].'</td>
 				<td>'.$item["nombre"].'</td>
 				<td>'.$item["apellido"].'</td>
-				<td><center><a href="index.php?action=editar&id='.$item["id"].'" ><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
+				<td><center><a href="index.php?action=editarCliente&id='.$item["id"].'" ><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
 
 				<td><center><a href="index.php?action=crudCliente&idBorrar='.$item["id"].'" onclick="return confirmDeleteCliente()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
 			</tr>';

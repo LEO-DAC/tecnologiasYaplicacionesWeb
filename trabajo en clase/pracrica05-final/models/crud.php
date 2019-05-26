@@ -208,10 +208,11 @@ class Datos extends Conexion{
 
 	public function actualizarProductoModel($datosModel, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, precio = :precio WHERE id = :id");
-
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET tipo=:tipo, nombre = :nombre, apellido = :apellido WHERE id = :id");
+		
+		$stmt->bindParam(":tipo", $datosModel["tipo"], PDO::PARAM_STR);
 		$stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
-		$stmt->bindParam(":precio", $datosModel["precio"], PDO::PARAM_INT);
+		$stmt->bindParam(":apellido", $datosModel["apellido"], PDO::PARAM_STR);
 		$stmt->bindParam(":id", $datosModel["id"], PDO::PARAM_INT);
 
 		if($stmt->execute()){
