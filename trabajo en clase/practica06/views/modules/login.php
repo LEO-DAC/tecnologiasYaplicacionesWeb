@@ -42,21 +42,14 @@
 					<div class="checkbox primary"><input type="checkbox" id="rememberme"><label for="rememberme">Remember me</label></div>
 					<!-- /.checkbox -->
 				</div>
-				<!-- /.pull-left -->
-				<div class="pull-right"><a href="page-recoverpw.html" class="a-link"><i class="fa fa-unlock-alt"></i>Forgot password?</a></div>
-				<!-- /.pull-right -->
+
 			</div>
 			<!-- /.clearfix -->
-			<button type="submit" name="login" class="frm-submit">Login<i class="fa fa-arrow-circle-right"></i></button>
-			<div class="row small-spacing">
-				<div class="col-sm-12">
-					<div class="txt-login-with txt-center">or login with</div>
-					<!-- /.txt-login-with -->
-				</div>
-			</div>
+			<button type="submit" name="login" class="frm-submit">Entrar<i class="fa fa-arrow-circle-right"></i></button>
+
 			<!-- /.row -->
-			<a href="page-register.html" class="a-link"><i class="fa fa-key"></i>New to HotelAdmin? Register.</a>
-			<div class="frm-footer">HotelAdmin © 2016.</div>
+			<a href="index.php?action=registrar" class="a-link"><i class="fa fa-key"></i>¿Erese nuevo? Registrate.</a>
+			<div class="frm-footer">HotelAdmin © 2019.</div>
 			<!-- /.footer -->
 		</div>
 		<!-- .inside -->

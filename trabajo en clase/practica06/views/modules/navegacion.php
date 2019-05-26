@@ -4,12 +4,12 @@
 <nav>
 	<div class="main-menu">
 		<header class="header">
-			<a href="index.html" class="logo">HotelTeam</a>
+			<a href="#" class="logo">HotelTeam</a>
 			<button type="button" class="button-close fa fa-times js__menu_close"></button>
 			<div class="user">
 				<a href="#" class="avatar"><img src="http://placehold.it/80x80" alt=""><span class="status online"></span></a>
 				<h5 class="name">
-					<a href="profile.html">
+					<a href="#">
 					  
 					  <?php
 					    if(isset($_SESSION['id_usuario'])){ 
@@ -52,7 +52,7 @@
 				<!-- /.title -->
 				<ul class="menu js__accordion">
 					<li class="current">
-						<a class="waves-effect" href="index.html"><i class="menu-icon fa fa-home"></i><span>Operaciones</span></a>
+						<a class="waves-effect"><i class="menu-icon fa fa-home"></i><span>Operaciones</span></a>
 					</li>
 					<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-hotel"></i><span>Habitaciones</span><span class="menu-arrow fa fa-angle-down"></span></a>
