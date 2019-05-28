@@ -468,11 +468,10 @@ class Datos extends Conexion{
         //se comprueba si hay una reservación activa con esa habitación para evitar un error   
 		$stmtExist = Conexion::conectar()->prepare("SELECT * FROM 'reservacion' where idHabitacion=:id");	
 		$stmtExist->bindParam(":id", $datosModel, PDO::PARAM_INT);		
-		
+		$e=$stmtExist->execute();
  
-		if($stmtExist->execute()){
-			echo '<script> alert("hay una reservacion registrada con esta habitacion") </sript>';
-			return "error";
+		if($e){
+			return "ErrorReservacion";
 		}else{
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
@@ -480,11 +479,9 @@ class Datos extends Conexion{
 		
 
 		if($stmt->execute()){
-			echo '<script> alert("inserción exitosa") </sript>';
 			return "success";
 		}
 		else{
-			echo '<script> alert("error2") </sript>';
 			return "error";
 		}
 

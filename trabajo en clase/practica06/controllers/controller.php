@@ -630,12 +630,14 @@ class MvcController{
 			$respuesta = Datos::borrarClienteModel($datosController, "cliente");
 
 			if($respuesta == "success"){
-
+		       
 			    $URL="index.php?action=crudCliente";
 			    echo "<script >document.location.href='{$URL}';</script>";
 			    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
-			
-			
+			    echo '<div class="alert alert-success" role="alert">Cliente eliminado con <strong>Exito!</strong><a href="#" class="alert-link"></a>. </div>
+					';
+			}else{
+				echo '<div class="alert alert-danger" role="alert"> <strong>Error!</strong> El cliente no se puede eliminar porque hay una reservación registrada. </div>';
 			}
 
 		}
@@ -663,9 +665,9 @@ class MvcController{
 
 			}else{
 				if($respuesta=="ErrorReservacion"){
-				 echo '<script> alert("No se puede eliminar la habitación porque hay una reservación registrada") </sript>';		
+					echo '<div class="alert alert-danger" role="alert"> <strong>Error!</strong> La habitacion no se puede eliminar porque hay una reservación registrada. </div>';		
 				}else{
-				    echo '<script> alert("Error al borrar la habitacion") </sript>';
+				   			echo '<div class="alert alert-danger" role="alert"> <strong>Error!</strong> La habitacion no se puede eliminar porque hay una reservación registrada. </div>';
 				}
 			}
 
