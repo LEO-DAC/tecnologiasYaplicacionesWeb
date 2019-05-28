@@ -5,7 +5,7 @@
   <div class="box-content card white">
 	  <h4 class="box-title">Registrar habitacion</h4>
 	  <div class="card-content">
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal"  enctype="multipart/form-data" method="post">
         <div class="col-sm-10">
           <label>selecciona el tipo de habitación:</label>
            <select name="tipo" class="form-control" required>
@@ -15,6 +15,10 @@
            </select><br>
            <input id="ig-1" type="number"  min="1" name="precio" class="form-control" placeholder="precio" required>
            <br>
+           <div class="form-group">
+             <label for="exampleInputFile">Imagen de habitacion:</label>
+             <input type="file" name="imagenHabitacion" accept=".png, .jpg, .jpeg" id="exampleInputFile" required>
+           </div>
            <button type="submit" name ="registrar"class="btn btn-primary btn-sm waves-effect waves-light">Registrar</button><br><br><br>
         </div>
       </form>
@@ -22,9 +26,9 @@
    </div>
 
  <?php
-  
+   //se crea una instancia para poder registrar los datos de una habitación 
   $controlador = new MvcController();
-  $salida = $controlador->registroHabitacionController();
+  $controlador->registroHabitacionController();
   
 ?>
 
@@ -41,12 +45,14 @@
                 <th>tipo</th>
                 <th>disponible</th>
                 <th>precio</th>
+                <th>imagen</th>  
                 <th>Actualizar</th>
                 <th>Eliminar</th>
               </tr>
             </thead>
             <tbody>
-             <?php   
+             <?php   // se crea una instancia de mvcController para poder mostrar los datos
+                     // o poder modificarlos dependiendo o eliminarlos 
                      $controlador = new MvcController();
                      $controlador->vistaHabitacionesController();
                      $controlador->borrarHabitacionController();

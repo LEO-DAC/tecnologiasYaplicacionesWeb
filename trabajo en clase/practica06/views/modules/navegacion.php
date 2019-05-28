@@ -12,7 +12,7 @@
 					<a href="#">
 					  
 					  <?php
-					    if(isset($_SESSION['id_usuario'])){ 
+					    if(isset($_SESSION['id_usuario'])){ // se muestra el nombre del usaurio
 					        echo "".$_SESSION['id_usuario']['username'];
 					      }else{
 					      	echo "iniciar sesión";
@@ -25,7 +25,7 @@
 					<?php
 					    if(isset($_SESSION['id_usuario']) AND $_SESSION['id_usuario']['admin']==1){ 
 					        echo "Administrador";
-					      }else{
+					      }else{  // se muestra si el usuario es administrador o solo usuario
 					      	echo "Usuario";
 					      }
 					   ?>

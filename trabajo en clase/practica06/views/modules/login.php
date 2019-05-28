@@ -1,10 +1,12 @@
 <div class="content">
   <?php
+    //se valida si hay un a inision en curso
     if(isset($_SESSION['id_usuario'])){
-      $URL="index.php?action=listar";
+      $URL="index.php?action=listar"; //y redirecciona a la pagina listar
       echo "<script>document.location.href='{$URL}';</script>";
       echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
     }
+    // se crea una instancia para validar al usuario
     $controlador = new MvcController();
     $controlador->login();
   

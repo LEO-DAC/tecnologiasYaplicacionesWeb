@@ -9,8 +9,8 @@
                   <div class="col-sm-10">
                      <h3 class="box-title">Generar reservacion</h3>
                      <select name="idCliente" class="form-control">
-                       
-                        <?php
+                        
+                        <?php // se llama a la funcion para poder mostrar los datos de los clientes
                           $controlador = new MvcController();
                           $salida = $controlador->MostrarClientesController();
                         ?> 
@@ -19,7 +19,7 @@
 
                      <select name="idHabitacion" class="form-control">
                        
-                        <?php
+                        <?php //se crea una instancia para mostrar las habitaciones disponibles
                           $controlador = new MvcController();
                           $salida = $controlador->MostrarHabitacionesController();
                         ?> 
@@ -50,7 +50,7 @@
 </div>
 
  <?php
-  
+    //se crea una instancia para poder registrar la reservación
   $controlador = new MvcController();
   $salida = $controlador->registroReservacionController();
   

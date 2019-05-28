@@ -1,35 +1,27 @@
 <?php
 
-#EXTENSIÓN DE CLASES: Los objetos pueden ser extendidos, y pueden heredar propiedades y métodos. Para definir una clase como extensión, debo definir una clase padre, y se utiliza dentro de una clase hija.
+
 
 require_once "conexion.php";
 
 class Datos extends Conexion{
 
 	#REGISTRO DE USUARIOS
+	//funcion encargada de registrar usuario en la base de datos por medio de pdo
 	#-------------------------------------
 	public function registroUsuarioModel($datosModel, $tabla){
 
-		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
-
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (username, password,admin) VALUES (:username,:password,:admin)");	
-
-		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
-
+		// se asignan los parametros para ser pasados a el insert
 		$stmt->bindParam(":username", $datosModel["username"], PDO::PARAM_STR);
 		$stmt->bindParam(":password", $datosModel["password"], PDO::PARAM_STR);
 		$stmt->bindParam("admin", $datosModel["admin"], PDO::PARAM_BOOL);
 		
 		if($stmt->execute()){
-
 			return "success";
-
 		}
-
 		else{
-
 			return "error";
-
 		}
 
 		$stmt->close();
@@ -38,7 +30,7 @@ class Datos extends Conexion{
 
 
 
-
+	//función login para validar el usuario que inicia sesión
 	public function login($datos_usuario){
 		$query = Conexion::conectar()->prepare("SELECT * FROM usuario WHERE username=:usuario AND password=:passw");
 
@@ -54,6 +46,7 @@ class Datos extends Conexion{
 
 
 	#EDITAR CLIENTE
+	//funcion para editar los datos del cliente obteniendolos y retornandolor en un arreglo
 	#-------------------------------------
 
 	public function editarClienteModel($datosModel, $tabla){
@@ -70,6 +63,8 @@ class Datos extends Conexion{
 
 
 	#EDITAR CLIENTE
+	//funcion que obtiene losd atos de la reservacion en un arreglo para
+	//mostrarlos en el formulario para poder ser editados
 	#-------------------------------------
 
 	public function editarReservacionModel($datosModel, $tabla){
@@ -78,9 +73,8 @@ class Datos extends Conexion{
 		$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);	
 		$stmt->execute();
 
-		
-
-
+			
+		//update para cambiar el estado de la habitacion a editar a disponible
 		$stmt2 = Conexion::conectar()->prepare("UPDATE habitacion SET disponible=1 WHERE id=:idHabitacion");
 		$stmt2->bindParam(":idHabitacion", $datosModel["idHabitacion"], PDO::PARAM_INT);
 		$stmt2->execute();
@@ -95,6 +89,7 @@ class Datos extends Conexion{
 	}
 
 	#EDITAR HABITACION
+	//función editar habitación para resivir los datos de la habitación y ser retornados en un arreglo
 	#-------------------------------------
 
 	public function editarHabitacionModel($datosModel, $tabla){
@@ -110,6 +105,7 @@ class Datos extends Conexion{
 	}
 
 	#INGRESO USUARIO
+	//se retornan los datos del usuario que ingresa para asi poder ser obtenidos y guardados en la sesión
 	#-------------------------------------
 	public function ingresoUsuarioModel($datosModel, $tabla){
 
@@ -126,6 +122,7 @@ class Datos extends Conexion{
 
 
 	#ACTUALIZAR CLIENTE
+	//funcón que actualiza los datos del cliente por medio de un UPDATE 
 	#-------------------------------------
 
 	public function actualizarClienteModel($datosModel, $tabla){
@@ -151,6 +148,7 @@ class Datos extends Conexion{
 
 
 	#ACTUALIZAR RESERVACION
+	// se actualzian los datos de la reservación por medio de esta función
 	#-------------------------------------
 
 	public function actualizarReservacionModel($datosModel, $tabla){
@@ -178,6 +176,8 @@ class Datos extends Conexion{
 
 
 	#ACTUALIZAR HABITACION
+	// se actualizan los datos de la habitacíon obtenidos por medio de un arreglo recivido
+	// acompañado del nombre de la tabla
 	#-------------------------------------
 
 	public function actualizarHabitacionModel($datosModel, $tabla){
@@ -201,18 +201,16 @@ class Datos extends Conexion{
 	}	
 
 	#REGISTRO DE HABITACIONES
+	//funcion para registrar los datos de la habitacion a reggistrar
 	#-------------------------------------
 	public function registroHabitacionModel($datosModel, $tabla){
 
-		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
-
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (tipo, disponible,precio) VALUES (:tipo,:disponible,:precio)");	
-
-		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (tipo, disponible,precio,imagenHabitacion) VALUES (:tipo,:disponible,:precio,:imagenHabitacion)");	
 
 		$stmt->bindParam(":tipo", $datosModel["tipo"], PDO::PARAM_STR);
 		$stmt->bindParam(":disponible", $datosModel["disponible"], PDO::PARAM_BOOL);
 		$stmt->bindParam(":precio", $datosModel["precio"], PDO::PARAM_STR);
+		$stmt->bindParam(":imagenHabitacion", $datosModel["imagenHabitacion"], PDO::PARAM_STR);
 		
 		if($stmt->execute()){
 
@@ -234,22 +232,20 @@ class Datos extends Conexion{
 
 
 	#REGISTRO DE RESERVACIONES
+	//funcion que ayuda  aregistrar los datos de la reservación 
 	#-------------------------------------
 	public function registroReservacionModel($datosModel, $tabla){
 
-		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
-
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (idCliente, idHabitacion,fechaEntrada,dias) VALUES (:idCliente, :idHabitacion,:fechaEntrada,:dias)");	
 
-		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
-
+		//se asignan los datos que se van a insertar
 		$stmt->bindParam(":idCliente", $datosModel["idCliente"], PDO::PARAM_INT);
 		$stmt->bindParam(":idHabitacion", $datosModel["idHabitacion"], PDO::PARAM_INT);
 		$stmt->bindParam(":fechaEntrada", $datosModel["fechaEntrada"], PDO::PARAM_STR);
 		$stmt->bindParam(":dias", $datosModel["dias"], PDO::PARAM_INT);
 		
 		if($stmt->execute()){
-			//se cambia el estado del 		
+			//se cambia el estado de la habitacion a no disponible por medio de este update 		
 			$stmt2 = Conexion::conectar()->prepare("UPDATE habitacion SET disponible=0 WHERE id=:idHabitacion");
 			$stmt2->bindParam(":idHabitacion", $datosModel["idHabitacion"], PDO::PARAM_INT);
 		
@@ -281,14 +277,12 @@ class Datos extends Conexion{
 
 
 	#REGISTRO DE CLIENTES
+	//funcion encargada de registrar los datos del cliente resividos por medio de un arreglo
+	//acompañado del nombre de la tabla
 	#-------------------------------------
 	public function registroClienteModel($datosModel, $tabla){
 
-		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
-
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (tipo, nombre,apellido) VALUES (:tipo,:nombre,:apellido)");	
-
-		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
 
 		$stmt->bindParam(":tipo", $datosModel["tipo"], PDO::PARAM_STR);
 		$stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
@@ -311,13 +305,15 @@ class Datos extends Conexion{
 	}
 
 	#VISTA HABITACION
+	//función que obtiene los datos de las habitaciones
+	//dependiendo del tipo de habitaciones
 	#-------------------------------------
 
 	public function vistaHabitacionesModel($tabla,$tipo){
         if($tipo==false){
-			$stmt = Conexion::conectar()->prepare("SELECT id, tipo, disponible, precio FROM $tabla");	
+			$stmt = Conexion::conectar()->prepare("SELECT id, tipo, disponible, precio, imagenHabitacion FROM $tabla");	
 		}else{
-			$stmt = Conexion::conectar()->prepare("SELECT id, tipo, disponible, precio FROM $tabla WHERE tipo='$tipo'");	
+			$stmt = Conexion::conectar()->prepare("SELECT id, tipo, disponible, precio,imagenHabitacion FROM $tabla WHERE tipo='$tipo'");	
 		}
 		$stmt->execute();
 
@@ -331,6 +327,7 @@ class Datos extends Conexion{
 
 
 	#VISTA RESERVACION
+	//función que obtiene los datos re las reservaciones siendo retornados en un arreglo
 	#-------------------------------------
 
 	public function vistaReservacionesModel($tabla){
@@ -349,6 +346,7 @@ class Datos extends Conexion{
 
 
 	#VISTA HABITACION DISPONIBLE
+	//funcion que muestra los datos de las habitaciones disponibles siendo retornados, solo se muestran las habitaciones disponibles
 	#-------------------------------------
 
 	public function vistaHabitacionesDisponiblesModel($tabla){
@@ -367,6 +365,7 @@ class Datos extends Conexion{
 
 
 	#VISTA HABITACION PRECIO
+	//se obtienen las habitaciones dependiendo de un rango de precio obtenido por parametro
 	#-------------------------------------
 
 	public function vistaHabitacionesPrecioModel($tabla,$minimo,$maximo){
@@ -381,7 +380,9 @@ class Datos extends Conexion{
 	}
 
 
+
 	#VISTA CLIENTE
+	//funcion  que obtiene los datos de los clientes para ser mostrados en una vista
 	#-------------------------------------
 
 	public function vistaClientesModel($tabla){
@@ -397,40 +398,8 @@ class Datos extends Conexion{
 	}
 
 
-	#REGISTRO DE PRODUCTO
-	#-------------------------------------
-	public function registroAdminModel($datosModel, $tabla){
-
-		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
-
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (nombre, precio) VALUES (:nombre,:precio)");	
-
-		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
-
-		$stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
-		$stmt->bindParam(":precio", $datosModel["precio"], PDO::PARAM_STR);
-
-		if($stmt->execute()){
-
-			return "success";
-
-		}
-
-		else{
-
-			return "error";
-
-		}
-
-		$stmt->close();
-
-	}
-
-
-
-
-
 	#BORRAR USUARIO
+	//funcion para borrar clientes reciviendo el id del cliente 
 	#------------------------------------
 	public function borrarClienteModel($datosModel, $tabla){
 
@@ -456,6 +425,7 @@ class Datos extends Conexion{
 
 
 	#BORRAR RESERVACION
+	//función que borra los datos de la reservación por medio del id 
 	#------------------------------------
 	public function borrarReservacionModel($datosModel, $tabla){
 
@@ -464,7 +434,7 @@ class Datos extends Conexion{
 
 		if($stmt->execute()){
 
-
+			// se cambia el estado de la habitación a disponible	
 			$stmt2 = Conexion::conectar()->prepare("UPDATE habitacion SET disponible=1 WHERE id=:idHabitacion");
 			$stmt2->bindParam(":idHabitacion", $datosModel["idHabitacion"], PDO::PARAM_INT);
 		
@@ -491,29 +461,38 @@ class Datos extends Conexion{
 
 
 	#BORRAR USUARIO
+	//se borra la información de la habitación
 	#------------------------------------
 	public function borrarHabitacionModel($datosModel, $tabla){
 
+        //se comprueba si hay una reservación activa con esa habitación para evitar un error   
+		$stmtExist = Conexion::conectar()->prepare("SELECT * FROM 'reservacion' where idHabitacion=:id");	
+		$stmtExist->bindParam(":id", $datosModel, PDO::PARAM_INT);		
+		
+ 
+		if($stmtExist->execute()){
+			echo '<script> alert("hay una reservacion registrada con esta habitacion") </sript>';
+			return "error";
+		}else{
+
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 		$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);
+		
 
 		if($stmt->execute()){
-
+			echo '<script> alert("inserción exitosa") </sript>';
 			return "success";
-
 		}
-
 		else{
-
+			echo '<script> alert("error2") </sript>';
 			return "error";
-
 		}
 
 		$stmt->close();
 
-	}
-
+ 	   }
+   }
     
-}
+ }
 
 ?>

@@ -34,7 +34,7 @@
               </tr>
             </thead>
             <tbody>
-             <?php   
+             <?php   // se crea una instancia para mostrar los datos de las habitaciones en una tabla  
                      $controlador = new MvcController();
                      $controlador->vistaHabitacionesPrecioController();
              ?>   

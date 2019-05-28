@@ -24,7 +24,7 @@
    </div>
 </div>
  <?php
-  
+  //se crea una instancia para poder registrar a los usuarios y administradores del sistema  
   $controlador = new MvcController();
   $controlador->registroUsuarioController();
   

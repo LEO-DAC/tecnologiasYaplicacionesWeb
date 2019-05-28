@@ -24,9 +24,9 @@
    </div>
 
  <?php
-  
+  //se crea una instancia para poder registrar los datos del formulario 
   $controlador = new MvcController();
-  $salida = $controlador->registroClienteController();
+  $controlador->registroClienteController();
   
 ?>
 <br><br>
@@ -48,7 +48,8 @@
               </tr>
             </thead>
             <tbody>
-             <?php   //
+             <?php   // se crea una instancia de mvcController para mostrar los datos de los clientes
+                      // o poder borrarlos o modificarlos
                      $controlador = new MvcController();
                      $controlador->vistaClientesController();
                      $controlador->borrarClienteController();

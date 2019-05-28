@@ -31,7 +31,7 @@
               </tr>
             </thead>
             <tbody>
-             <?php   
+             <?php   // se crea una tabla y se imprimen los datos de las habitaciones  
                      $controlador = new MvcController();
                      $controlador->vistaHabitacionesController();
              ?>   

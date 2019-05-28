@@ -22,7 +22,7 @@
               </tr>
             </thead>
             <tbody>
-             <?php   
+             <?php   //se crea una instancia para mostrar los datos de las reservaciones en una tabla
                      $controlador = new MvcController();
                      $controlador->vistaReservacionesController();
                      $controlador->borrarReservacionController();

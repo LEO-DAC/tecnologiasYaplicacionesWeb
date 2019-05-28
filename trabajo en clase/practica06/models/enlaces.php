@@ -1,5 +1,5 @@
 <?php 
-
+//clase encargada de redireccionar dependiendo de la pagina pedida 
 class Paginas{
 	
 	public function enlacesPaginasModel($enlaces){
