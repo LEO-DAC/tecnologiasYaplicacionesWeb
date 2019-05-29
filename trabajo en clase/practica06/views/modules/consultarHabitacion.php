@@ -31,6 +31,7 @@
                 <th>tipo</th>
                 <th>disponible</th>
                 <th>precio</th>
+                <th>imagen</th>
               </tr>
             </thead>
             <tbody>

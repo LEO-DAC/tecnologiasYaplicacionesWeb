@@ -1,7 +1,5 @@
 <?php
 
-
-
 require_once "conexion.php";
 
 class Datos extends Conexion{
@@ -438,7 +436,6 @@ class Datos extends Conexion{
 			$stmt2 = Conexion::conectar()->prepare("UPDATE habitacion SET disponible=1 WHERE id=:idHabitacion");
 			$stmt2->bindParam(":idHabitacion", $datosModel["idHabitacion"], PDO::PARAM_INT);
 		
-			
 			if($stmt2->execute()){
 				return "success";
 			}
