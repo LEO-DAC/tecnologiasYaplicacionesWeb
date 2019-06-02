@@ -1,3 +1,7 @@
+<?php echo "links inferiores";?>
+
+
+
     <script src="views/modules/assets/scripts/jquery.min.js"></script>
 	<script src="views/modules/assets/scripts/modernizr.min.js"></script>
 	<script src="views/modules/assets/plugin/bootstrap/js/bootstrap.min.js"></script>
