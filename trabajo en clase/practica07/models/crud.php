@@ -56,6 +56,21 @@ class Datos extends Conexion{
 
 	}
 
+	public function registrarAlumnoMateriaModel($datos){
+		$stmt = Conexion::conectar()->prepare("INSERT INTO materia_alumno (id_materia,id_alumno) VALUES (:id_materia,:id_alumno)");
+		$stmt->bindParam(":id_materia",  $datos["id_materia"],PDO::PARAM_INT);
+		$stmt->bindParam(":id_alumno",  $datos["id_alumno"],PDO::PARAM_INT);
+
+	   if($stmt->execute()){ //se valida si la inserción fué exitosa
+			return "success";//en caso de ser así, se retorna una cadena con el mesnaje success	
+		}else{
+			return "error"; //de lo contrario se retorna la cadena errror
+		}
+
+		$stmt->close(); //se cierra el flujo de la conexión
+			
+	}
+
 	//funcion encargada de registrar un grupo mandando la información a la base de datos por pdo
 	public function registrarGrupoModel($datosModel){
 		$stmt = Conexion::conectar()->prepare("INSERT INTO grupo (carrera,cuatrimestre) VALUES (:carrera,:cuatrimestre)");
@@ -141,6 +156,46 @@ class Datos extends Conexion{
 	}
 
 
+
+	//función encargada de modificar los datos de la materia a editar	
+	public function actualizarMateriaModel($datos){
+		$stmt = Conexion::conectar()->prepare("UPDATE materia SET nombre = :nombre, clave = :clave, carrera = :carrera, id_profesor=:id_profesor WHERE id = :id");
+		
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":clave", $datos["clave"], PDO::PARAM_STR);
+		$stmt->bindParam(":carrera", $datos["carrera"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_profesor", $datos["id_profesor"], PDO::PARAM_INT);
+		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+			return "success";
+		}
+		else{
+			return "error";
+		}
+
+		$stmt->close();	
+	}
+
+
+
+	//función encargada de modificar los datos del grupo a editar	
+	public function actualizarGrupoModel($datos){
+		$stmt = Conexion::conectar()->prepare("UPDATE grupo SET carrera = :carrera, cuatrimestre=:cuatrimestre WHERE id = :id");
+		
+		$stmt->bindParam(":cuatrimestre", $datos["cuatrimestre"], PDO::PARAM_INT);
+		$stmt->bindParam(":carrera", $datos["carrera"], PDO::PARAM_STR);
+		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+			return "success";
+		}
+		else{
+			return "error";
+		}
+
+		$stmt->close();	
+	}
 	//función encargada de eliminar registros de cualquier tabla haciendo uso del nombre de
 	//la tabla,acompañado de la clave o id del registro
 	public function eliminarRegistro($id,$tabla){

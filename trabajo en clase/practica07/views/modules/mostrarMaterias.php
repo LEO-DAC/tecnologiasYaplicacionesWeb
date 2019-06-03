@@ -13,8 +13,8 @@
             <thead>
               <tr>
                 <th>nombre</th>
-                <th>carrera</th>
                 <th>clave</th>
+                <th>carrera</th>
                 <th>profesor</th>
                 <th>Actualizar</th>
                 <th>Eliminar</th>
