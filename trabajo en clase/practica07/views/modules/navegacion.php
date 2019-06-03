@@ -2,7 +2,7 @@
 	<div class="header-top">
 		<div class="container">
 			<div class="pull-left">
-				<a href="index.html" class="logo">Gestor de grupos</a>
+				<a  class="logo">Gestor de grupos</a>
 			</div>
 			<!-- /.pull-left -->
 			<div class="pull-right">
@@ -38,20 +38,21 @@
 						<ul class="sub-menu single">
 							<li class="has-sub">
 								<ul class="child-list">
-									<li><a href="ui-buttons.html">registrar</a></li>
-									<li><a href="ui-cards.html">mostrar</a></li>
+									<li><a href="index.php?action=registrarGrupo">registrar</a></li>
+									<li><a href="index.php?action=mostrarGrupos">mostrar</a></li>
 								</ul>
 								<!-- /.child-list -->
 							</li>
 						</ul>
 						<!-- /.sub-menu mega -->
-					</li>					<li class="has-sub">
+					</li>					
+					<li class="has-sub">
 						<a href="#"><i class="ico fa fa-book"></i><span>Materias</span></a>
 						<ul class="sub-menu single">
 							<li class="has-sub">
 								<ul class="child-list">
 									<li><a href="index.php?action=registrarMateria">registrar</a></li>
-									<li><a href="ui-cards.html">mostrar</a></li>
+									<li><a href="index.php?action=mostrarMaterias">mostrar</a></li>
 								</ul>
 								<!-- /.child-list -->
 							</li>
@@ -63,7 +64,7 @@
 						<ul class="sub-menu single">
 							<li><a href="index.php?action=registrarProfesor">registrar</a></li>
 
-							<li><a href="chart-3d.html">mostrar</a></li>
+							<li><a href="index.php?action=mostrarProfesores">mostrar</a></li>
 						</ul>
 						<!-- /.sub-menu single -->
 					</li>
@@ -71,11 +72,10 @@
 						<a href="#"><i class="ico fa fa-users"></i><span>Alumnos</span></a>
 						<ul class="sub-menu single">
 							<li><a href="index.php?action=registrarAlumno">registrar</a></li>
-							<li><a href="chart-3d.html">mostrar</a></li>
+							<li><a href="index.php?action=mostrarAlumnos">mostrar</a></li>
 						</ul>
 						<!-- /.sub-menu single -->
 					</li>
-
 			</ul>
 			<!-- /.menu -->
 		</div>

@@ -9,19 +9,8 @@
 
 <script type="text/javascript">
    // codigo js para crear alerta en caso de eliminar cliente
-   function confirmDeleteCliente(){
-      var respuesta = confirm("¿Estas seguro de borrar  a este cliente?");
-
-      if(respuesta == true){
-          return true;
-      }else{
-        return false;
-      }
-
-   }
-     // codigo js para crear alerta en caso de eliminar cliente
-   function confirmDeleteHabitacion(){
-      var respuesta = confirm("¿Estas seguro de borrar  a esta habitacion?");
+   function confirmDeleteRegistro(){
+      var respuesta = confirm("¿Estas seguro de borrar  a este registro?");
 
       if(respuesta == true){
           return true;

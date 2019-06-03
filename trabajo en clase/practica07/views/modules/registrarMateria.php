@@ -8,13 +8,15 @@
                <div class="form-group">
                   <div class="col-sm-10">
                      <h3 class="box-title">Registrar materia</h3>
+                     <input type="text" name="nombre" placeholder="nombre de la materia" class="form-control" required><br>
                      <input id="ig-1" type="text" name="clave" class="form-control" placeholder="clave" required><br>
-                     <select name="id_profesor" class="form-control" required>
-                      <option>Ingenieria en Mecatrónica</option>
-                      <option>Ingenieria en tecnologías de Manufactura</option><option>Ingenieria en tecnologías de la información</option>
+                     <select name="carrera" class="form-control" required>
+                      <option>Ingeniería en Mecatrónica</option>
+                      <option>Ingeniería en tecnologías de Manufactura</option>
+                      <option>Ingeniería en tecnologías de la información</option>
                       <option>Licenciatura en Administración y Gestión empresarial</option>
-                      <option>Ingenieria en sistemas automotrices</option>
-                     </select> 
+                      <option>Ingeniería en sistemas automotrices</option>
+                     </select> <br>
                      <select name="id_profesor" class="form-control" required>
                        <?php
                           $profesores = new MvcController();
