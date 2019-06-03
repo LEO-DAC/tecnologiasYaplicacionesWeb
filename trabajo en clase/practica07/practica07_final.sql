@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-06-2019 a las 06:01:24
+-- Tiempo de generación: 03-06-2019 a las 09:06:45
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `practica07`
+-- Base de datos: `practica07_final`
 --
 
 -- --------------------------------------------------------
@@ -49,7 +49,7 @@ INSERT INTO `alumno` (`matricula`, `nombres`, `apellidos`) VALUES
 
 CREATE TABLE `grupo` (
   `id` int(11) NOT NULL,
-  `carrera` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `carrera` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `cuatrimestre` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -58,7 +58,10 @@ CREATE TABLE `grupo` (
 --
 
 INSERT INTO `grupo` (`id`, `carrera`, `cuatrimestre`) VALUES
-(1, 'IngenierÃ­a en tecno', 1);
+(5, 'Licenciatura en AdministraciÃ³n y GestiÃ³n empresarial', 7),
+(6, 'IngenierÃ­a en tecnologÃ­as de Manufactura', 3),
+(7, 'IngenierÃ­a en sistemas automotrices', 8),
+(8, 'Ingenieria en tecnologÃ­as de la informaciÃ³n', 9);
 
 -- --------------------------------------------------------
 
@@ -90,8 +93,9 @@ CREATE TABLE `materia` (
 --
 
 INSERT INTO `materia` (`id`, `nombre`, `clave`, `carrera`, `id_profesor`) VALUES
-(2, 'programaciÃ³n estructurada', '15', 'Ingenieria en MecatrÃ³nica', 1),
-(4, 'TECNOLOGÃA Y APLICACIONES WEB', '1478', 'IngenierÃ­a en tecnologÃ­as de la informaciÃ³n', 5);
+(4, 'TECNOLOGÃA Y APLICACIONES WEB', '1478', 'IngenierÃ­a en tecnologÃ­as de la informaciÃ³n', 4),
+(5, 'programaciÃ³n estructurada', '4865', 'IngenierÃ­a en tecnologÃ­as de la informaciÃ³n', 3),
+(6, 'Aplicaciones moviles', '7865', 'IngenierÃ­a en tecnologÃ­as de la informaciÃ³n', 1);
 
 -- --------------------------------------------------------
 
@@ -103,6 +107,13 @@ CREATE TABLE `materia_alumno` (
   `id_materia` int(11) NOT NULL,
   `id_alumno` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `materia_alumno`
+--
+
+INSERT INTO `materia_alumno` (`id_materia`, `id_alumno`) VALUES
+(4, 1530438);
 
 -- --------------------------------------------------------
 
@@ -181,13 +192,13 @@ ALTER TABLE `profesor`
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor`
