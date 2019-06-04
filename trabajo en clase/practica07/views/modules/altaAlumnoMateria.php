@@ -7,20 +7,25 @@
                <div class="form-group">
                   <div class="col-sm-10">
                      <h3 class="box-title">Alta de alumno en materia</h3>
-                      <select name="id_alumno" class="form-control" required>
+                      <label>Selecciona la materia: </label>
                        <?php
-                          $alumnos = new MvcController();
-                          $alumnos->mostrarAlumnosController();
-                       ?>
-                     </select><br> 
-                      <select name="id_materia" class="form-control" required>
-                       <?php
+                       echo '<select name="id_materia" class="form-control" required>';
                           $materias = new MvcController();
                           $materias->mostrarMateriasController();
-                       ?>
-                     </select><br> 
-               
-                    <button type="submit" name ="registrar"class="btn btn-primary btn-sm waves-effect waves-light">Registrar</button><br>
+                        echo '</select><br>';    
+                        $materias->MostrarProfesorAlumnoAlta(); 
+
+                        echo'<button type="submit" name ="seleccionar" class="btn btn-primary btn-sm waves-effect waves-light">Seleccionar</button><br><br>';
+
+                        echo'<label>Selecciona el alumno para agregar:</label>
+                           <select name="id_alumno" class="form-control" required>';
+                          $alumnos = new MvcController();
+                          $alumnos->mostrarAlumnosController();      
+                         echo'</select><br>';
+                        
+
+                     ?>
+                    <button type="submit" name ="registrar"class="btn btn-success btn-sm waves-effect waves-light">Registrar</button><br>
                
                   </div>
                </div>  

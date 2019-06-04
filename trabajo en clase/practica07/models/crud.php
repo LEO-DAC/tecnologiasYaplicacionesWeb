@@ -222,5 +222,16 @@ class Datos extends Conexion{
 	}
 
 
+	//funcion para rMOSTRAR una sentencia en sql
+	public function sentencia($sentencia){
+		$stmt = Datos::conectar()->prepare($sentencia);
+		$stmt->execute();
+		//se retorna el arreglo con los datos de los profesores
+		return $stmt->fetchAll();
+		$stmt->close();
+
+	}
+
+
 }
 ?>

@@ -126,9 +126,8 @@
   //funcion que muestra los nombres de las materias a elegir para el alumno
   public function mostrarMateriasController(){
       $materias = Datos::vista("materia");
-      foreach($materias as $row => $item){
-        $profesor= Datos::recuperarRegistro($item["id_profesor"],"profesor");  
-       echo'<option value ='.$item['id'].'>'.$item['nombre'].' clave:'.$item['clave'].' profesor'.$profesor["nombres"].' '.$profesor["apellidos"].'</option>';
+      foreach($materias as $row => $item){  
+       echo'<option value ='.$item['id'].'>'.$item['nombre'].'</option>';
       }
   }
 
@@ -211,12 +210,13 @@
     $respuesta = Datos::vista("materia");
     foreach($respuesta as $row => $item){
       $profesor = Datos::recuperarRegistro($item["id_profesor"],"profesor");
-
+      $nombreMateria=$item["nombre"];
     echo'<tr>
         <td>'.$item["nombre"].'</td>
         <td>'.$item["clave"].'</td>
         <td>'.$item["carrera"].'</td>
         <td>'.$profesor["nombres"].' '.$profesor["apellidos"].'</td>
+      <td><center><a href="index.php?action=verMateriaAlumno&id='.$item["id"].'&nombre='.$item["nombre"].'" ><i class="fa fa-eye"></i></a></center></td>
         <td><center><a href="index.php?action=editarMateria&id='.$item["id"].'" ><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
 
         <td><center><a href="index.php?action=mostrarMaterias&idBorrar='.$item["id"].'" onclick="return confirmDeleteRegistro()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
@@ -545,7 +545,39 @@ public function editarGrupoController(){
     }
   }
 
+    //funcion para mostrar el profesor a la hora de querer dar de alta un un alumno en una materia
+   public function mostrarProfesorAlumnoAlta(){
+      if(isset($_POST["seleccionar"])){   
+        
+          $materia  = Datos::recuperarRegistro($_POST["id_materia"],"materia");
+                      
+          $profesor = Datos::recuperarRegistro($materia["id_profesor"],"profesor");
+          echo '<label>Profesor:</label>';                
+          echo'<input class="form-control" type="text" value="'.$profesor["nombres"].' '.$profesor["apellidos"].'"" name="nombreProfesor" readonly="readonly"><br>'; 
+       }
+  }
+
+  public function vistaMateriaAlumnosController(){
+    
+    $id_materia=$_GET["id"];
+
+    $respuesta = Datos::sentencia("SELECT * FROM alumno INNER JOIN materia_alumno WHERE alumno.matricula=materia_alumno.id_alumno AND materia_alumno.id_materia=$id_materia"); 
+    
+    foreach($respuesta as $row => $item){
+    echo'<tr>
+        <td>'.$item["matricula"].'</td>
+        <td>'.$item["nombres"].'</td>
+        <td>'.$item["apellidos"].'</td>
+        <td><center><a href="index.php?action=editarAlumno&id='.$item["matricula"].'" ><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
+
+        <td><center><a href="index.php?action=mostrarAlumnos&idBorrar='.$item["matricula"].'" onclick="return confirmDeleteRegistro()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
+      </tr>';
+
+    }
+
+  }
+
+
 
 }
-
 ?>

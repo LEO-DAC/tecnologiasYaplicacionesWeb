@@ -19,6 +19,17 @@
       }
 
    }
+
+  function confirmAgregarAlumnoMateria(){
+      var respuesta = confirm("¿Estas seguro de dar de alta en esta materia al alumno?");
+
+      if(respuesta == true){
+          return true;
+      }else{
+        return false;
+      }
+
+   }
 </script>
 <body>
 

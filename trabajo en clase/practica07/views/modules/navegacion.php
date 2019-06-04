@@ -53,7 +53,7 @@
 								<ul class="child-list">
 									<li><a href="index.php?action=registrarMateria">registrar</a></li>
 									<li><a href="index.php?action=mostrarMaterias">mostrar</a></li>
-									<li><a href="index.php?action=altaAlumnoMateria">Alta</a></li>
+									<li><a href="index.php?action=altaAlumnoMateria">Alta de alumno en materia</a></li>
 								</ul>
 								<!-- /.child-list -->
 							</li>
