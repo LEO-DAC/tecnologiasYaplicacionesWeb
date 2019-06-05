@@ -4,7 +4,7 @@
  <center>
   <br><br><br><br><br>
    <div class="box-content card white">
-     <h4 class="box-title">Grupos</h4> 
+     <h4 class="box-title"><?php echo "".$_GET["carrera"]."-".$_GET["cuatrimestre"];?> </h4> 
 
      <div class="col-sm-12">   
       <div class= "row">
@@ -12,18 +12,17 @@
      <table id="example" class="table table-striped table-bordered display" style="width:100%">
             <thead>
               <tr>
-                <th>carrera</th>
-                <th>cuatrimestre</th>
-                <th>ver</th>
-                <th>Actualizar</th>
+                <th>clave</th>
+                <th>materia</th>
+                <th>Profesor</th>
                 <th>Eliminar</th>
               </tr>
             </thead>
             <tbody>
               <?php
-                $grupos = new MvcController();
-                $grupos->vistaGruposController();
-                $grupos->eliminarGrupoController();
+                $alumnos = new MvcController();
+                $alumnos->vistaGrupoMateriasController();
+                $alumnos->eliminarGrupoMateriaController();
                 ?>
            </tbody>
       </table>

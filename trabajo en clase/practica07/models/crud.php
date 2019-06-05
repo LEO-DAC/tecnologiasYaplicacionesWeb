@@ -233,5 +233,38 @@ class Datos extends Conexion{
 	}
 
 
+
+	public function sentenciaDelete($sentencia){
+
+		$stmt = Conexion::conectar()->prepare($sentencia);
+		
+		if($stmt->execute()){
+			return "success";
+		}
+		else{
+			return "error";
+		}
+
+		$stmt->close();	
+	
+
+	}
+
+	public function sentenciaInsert($sentencia){
+
+		$stmt = Conexion::conectar()->prepare($sentencia);
+		
+		if($stmt->execute()){
+			return "success";
+		}
+		else{
+			return "error";
+		}
+
+		$stmt->close();	
+	
+
+	}
+
 }
 ?>

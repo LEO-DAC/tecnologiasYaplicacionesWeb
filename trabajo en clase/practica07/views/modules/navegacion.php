@@ -40,6 +40,7 @@
 								<ul class="child-list">
 									<li><a href="index.php?action=registrarGrupo">registrar</a></li>
 									<li><a href="index.php?action=mostrarGrupos">mostrar</a></li>
+									<li><a href="index.php?action=altaGrupoMateria">Alta de materia en grupo</a></li>
 								</ul>
 								<!-- /.child-list -->
 							</li>
@@ -53,7 +54,7 @@
 								<ul class="child-list">
 									<li><a href="index.php?action=registrarMateria">registrar</a></li>
 									<li><a href="index.php?action=mostrarMaterias">mostrar</a></li>
-									<li><a href="index.php?action=altaAlumnoMateria">Alta de alumno en materia</a></li>
+									<li><a href="index.php?action=altaAlumnoMateria">Alta alumno en materia</a></li>
 								</ul>
 								<!-- /.child-list -->
 							</li>

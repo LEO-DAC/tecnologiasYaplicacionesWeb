@@ -6,21 +6,17 @@
             <form class="form-horizontal" method="post">
                <div class="form-group">
                   <div class="col-sm-10">
-                     <h3 class="box-title">Alta de alumno en materia</h3>
+                     <h3 class="box-title">Alta de materia en grupo</h3>
                        <?php
-                       echo '<select name="id_materia_select" class="form-control" required>';
-                      // echo'  <option disabled selected>Selecciona una materia</option>';
-                          $materias = new MvcController();
-                          $materias->mostrarMateriasController();
+                       echo '<select name="id_grupo" class="form-control" required>';
+                       echo'  <option disabled selected>Selecciona una grupo</option>';
+                          $grupos = new MvcController();
+                          $grupos->mostrarGruposController();
                         echo '</select><br>';    
-                        $materias->MostrarProfesorAlumnoAlta(); 
-
-                        echo'<button type="submit" name ="seleccionar" class="btn btn-primary btn-sm waves-effect waves-light" required>Seleccionar</button><br><br>';
-
-                        echo'<select name="id_alumno" class="form-control" required>';
-                         echo'  <option disabled selected>Selecciona una alumno</option>';
+                        echo'<select name="id_materia" class="form-control" required>';
+                         echo'  <option disabled selected>Selecciona una materia</option>';
                           $alumnos = new MvcController();
-                          $alumnos->mostrarAlumnosController();      
+                          $alumnos->mostrarMateriasController();      
                          echo'</select><br>';
                         
 
@@ -38,6 +34,6 @@
  <?php
   //se crea una instancia para poder registrar a los usuarios y administradores del sistema  
   $controlador = new MvcController();
-  $controlador->registrarAlumnoMateriaController();
+  $controlador->registrarGrupoMateriaController();
   
 ?>

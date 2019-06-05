@@ -90,22 +90,50 @@
 
   //funcion encargada de dar de alta a los alumnos en las materias
  public function registrarAlumnoMateriaController(){
-      if(isset($_POST["registrar"])){
+      if(isset($_POST["registrar"]) and !isset($_POST["id_materia"])){
+
+          echo "<script type=\"text/javascript\">alert(\"selecciona una materia y da clic en el botón seleccionar!!\");</script>";
+              
+      }
+      elseif(isset($_POST["registrar"]) and isset($_POST["id_materia"])){
            $datos=array("id_alumno"=>$_POST["id_alumno"],
                         "id_materia"=>$_POST["id_materia"]);
            $respuesta=Datos::registrarAlumnoMateriaModel($datos);
 
+           $materia= Datos::recuperarRegistro($_POST["id_materia"],"materia");
+
         if($respuesta=="success"){
           echo "<script type=\"text/javascript\">alert(\"Se registró el alumno en la materia con exito!!\");</script>";  
-          $URL="index.php?action=mostrarMaterias";
+          $URL='index.php?action=verMateriaAlumno&id='.$_POST["id_materia"].'&nombre='.$materia["nombre"].'';
           echo "<script >document.location.href='{$URL}';</script>";
           echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
         }else{
 
-          echo "<script type=\"text/javascript\">alert(\"Se presentó un problema al guardar!!\");</script>";
+          echo "<script type=\"text/javascript\">alert(\"Se presentó un problema al parecer el alumno ya está dado de alta en la clase!!\");</script>";
             }  
       }    
 }
+
+
+ public function registrarGrupoMateriaController(){
+      if(isset($_POST["registrar"])){
+          $id_materia=$_POST["id_materia"];
+          $id_grupo=$_POST["id_grupo"];
+
+          $registrar = Datos::sentenciaInsert("INSERT INTO grupo_materia (id_materia,id_grupo) VALUES($id_materia,$id_grupo)");
+
+        if($registrar=="success"){
+          echo "<script type=\"text/javascript\">alert(\"La materia de dió de alta con exito!!\");</script>";  
+          $URL="index.php?action=mostrarGrupos";
+          echo "<script >document.location.href='{$URL}';</script>";
+          echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+        }else{
+
+          echo "<script type=\"text/javascript\">alert(\"Se presentó un problema al guardar los cambios!!\");</script>";
+            }  
+      }
+}
+
 
   //funcion para mostrar los profesores en un select en el ormulario de registrar materia
   public function mostrarProfesoresController(){
@@ -130,6 +158,15 @@
        echo'<option value ='.$item['id'].'>'.$item['nombre'].'</option>';
       }
   }
+
+  //funcion que muestra los grupos para dar de alta la materias en el formulario altaGrupoMateria
+  public function mostrarGruposController(){
+      $grupos = Datos::vista("grupo");
+      foreach($grupos as $row => $item){  
+       echo'<option value ='.$item['id'].'>'.$item['carrera'].' cuatrimestre: '.$item["cuatrimestre"].'</option>';
+      }
+  }
+
 
 
   //cunion para guardar los datos del grupo agregado
@@ -195,8 +232,10 @@
     echo'<tr>
         <td>'.$item["carrera"].'</td>
         <td><center>'.$item["cuatrimestre"].'</center></td>
-        <td><center><a href="index.php?action=editarGrupo&id='.$item["id"].'" ><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
+        <td><center><a href="index.php?action=verGrupoMateria&id='.$item["id"].'&carrera='.$item["carrera"].'&cuatrimestre='.$item["cuatrimestre"].'" ><i class="fa fa-eye"></i></a></center></td>
 
+        <td><center><a href="index.php?action=editarGrupo&id='.$item["id"].'" ><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
+        
         <td><center><a href="index.php?action=mostrarGrupos&idBorrar='.$item["id"].'" onclick="return confirmDeleteRegistro()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
       </tr>';
    }
@@ -549,8 +588,10 @@ public function editarGrupoController(){
    public function mostrarProfesorAlumnoAlta(){
       if(isset($_POST["seleccionar"])){   
         
-          $materia  = Datos::recuperarRegistro($_POST["id_materia"],"materia");
-                      
+          $materia  = Datos::recuperarRegistro($_POST["id_materia_select"],"materia");
+          echo '<label>Materia:</label>';                
+          echo'<input class="form-control" type="text" value="'.$materia["nombre"].'"" name="nombreMateria" readonly="readonly"><br>';
+          echo'<input type="hidden" value="'.$materia["id"].'" name="id_materia" required>';                   
           $profesor = Datos::recuperarRegistro($materia["id_profesor"],"profesor");
           echo '<label>Profesor:</label>';                
           echo'<input class="form-control" type="text" value="'.$profesor["nombres"].' '.$profesor["apellidos"].'"" name="nombreProfesor" readonly="readonly"><br>'; 
@@ -559,19 +600,88 @@ public function editarGrupoController(){
 
   public function vistaMateriaAlumnosController(){
     
-    $id_materia=$_GET["id"];
+    if(isset($_GET["id"])){
+      $id_materia=$_GET["id"];
 
-    $respuesta = Datos::sentencia("SELECT * FROM alumno INNER JOIN materia_alumno WHERE alumno.matricula=materia_alumno.id_alumno AND materia_alumno.id_materia=$id_materia"); 
-    
-    foreach($respuesta as $row => $item){
-    echo'<tr>
-        <td>'.$item["matricula"].'</td>
-        <td>'.$item["nombres"].'</td>
-        <td>'.$item["apellidos"].'</td>
-        <td><center><a href="index.php?action=editarAlumno&id='.$item["matricula"].'" ><i class="ico zmdi zmdi-edit zmdi-hc-fw"></i></a></center></td>
+      $respuesta = Datos::sentencia("SELECT * FROM alumno INNER JOIN materia_alumno WHERE alumno.matricula=materia_alumno.id_alumno AND materia_alumno.id_materia=$id_materia"); 
+      
+      foreach($respuesta as $row => $item){
+      echo'<tr>
+          <td>'.$item["matricula"].'</td>
+          <td>'.$item["nombres"].'</td>
+          <td>'.$item["apellidos"].'</td>
+          <td><center><a href="index.php?action=verMateriaAlumno&idBorrar='.$item["matricula"].'&id_materia='.$item["id_materia"].'&nombre='.$_GET["nombre"].'" onclick="return confirmDeleteRegistro()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
+        </tr>';
 
-        <td><center><a href="index.php?action=mostrarAlumnos&idBorrar='.$item["matricula"].'" onclick="return confirmDeleteRegistro()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
-      </tr>';
+      }
+    }
+  }
+
+
+  public function vistaGrupoMateriasController(){
+     
+     if(isset($_GET["id"])){
+      $id_grupo=$_GET["id"];
+
+     $respuesta = Datos::sentencia("SELECT *  FROM materia as m 
+          INNER JOIN grupo_materia as gm 
+          INNER JOIN profesor as p  
+                WHERE gm.id_materia =m.id
+                    and m.id_profesor=p.id  
+                    and gm.id_grupo=$id_grupo");
+    }
+    foreach ($respuesta as $row => $item) {
+       echo'<tr>
+          <td>'.$item["clave"].'</td>
+          <td>'.$item["nombre"].'</td>
+          <td>'.$item["nombres"].' '.$item["apellidos"].'</td>
+          <td><center><a href="index.php?action=verGrupoMateria&id='.$item["id_grupo"].'&id_materia='.$item["id_materia"].'&carrera='.$item["carrera"].'&cuatrimestre='.$_GET["cuatrimestre"].'" onclick="return confirmDeleteRegistro()"><i class="ico zmdi zmdi-delete zmdi-hc-fw"></i></a></center></td>
+       </tr>';
+     } 
+  }
+
+
+    //función encargada de eliminar el profesor seleccionado
+  public function eliminarMateriaAlumnoController(){
+    if (isset($_GET["matricula"])) {
+          
+          $id_materia=$_GET["id_materia"];
+          $nombre =$_GET["nombre"];
+          $matricula=$_GET["matricula"];
+          $cuatrimestre=$_GET["cuatrimestre"];
+          $carrera=$_GET["carrera"];
+
+          $respuesta = Datos::sentenciaDelete("DELETE FROM materia_alumno WHERE id_materia=$id_materia AND id_alumno= $matricula");
+
+        if($respuesta=="success"){
+          echo "<script type=\"text/javascript\">alert(\"Se eliminó el alumno de la materia con exito!!\");</script>";  
+          $URL='index.php?action=verMateriaAlumno&id='.$id_materia.'&nombre='.$_GET["nombre"].'& ';
+          echo "<script >document.location.href='{$URL}';</script>";
+          echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+        }else{
+
+          echo "<script type=\"text/javascript\">alert(\"Se presentó un problema al eliminar!!\");</script>";
+            }
+    }
+  }
+
+  public function eliminarGrupoMateriaController(){
+          if (isset($_GET["id_grupo"])) {
+          
+          $id_grupo=$_GET["id_grupo"];
+          $id_materia=$_GET["id_materia"];
+
+          $respuesta = Datos::sentenciaDelete("DELETE FROM grupo_materia WHERE id_materia=$id_materia AND id_grupo= $id_grupo");
+
+        if($respuesta=="success"){
+          echo "<script type=\"text/javascript\">alert(\"Se eliminó el alumno de la materia con exito!!\");</script>";  
+          $URL='index.php?action=verGrupoMateria&id='.$id_grupo.'&carrera='.$_GET["carrera"].'&cuatrimestre='.$_GET["cuatrimestre"].'';
+          echo "<script >document.location.href='{$URL}';</script>";
+          echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+        }else{
+
+          echo "<script type=\"text/javascript\">alert(\"Se presentó un problema al eliminar!!\");</script>";
+            }
 
     }
 

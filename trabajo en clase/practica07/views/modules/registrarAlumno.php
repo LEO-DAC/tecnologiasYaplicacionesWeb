@@ -7,7 +7,7 @@
                <div class="form-group">
                   <div class="col-sm-10">
                      <h3 class="box-title">Registrar alumno</h3>
-                      <input id="ig-1" type="number"  min="1000000" max="9999999" name="matricula" class="form-control" placeholder="matricula" required><br>
+                      <input type="number"  min="1000000" max="9999999" name="matricula" class="form-control" placeholder="matricula" required><br>
                      <input id="ig-1" type="text" name="nombres" class="form-control" placeholder="nombre(s)" required><br>
                      <input id="ig-1" type="text" name="apellidos" class="form-control" placeholder="apellidos" required><br> 
                     <button type="submit" name ="registrar"class="btn btn-primary btn-sm waves-effect waves-light">Registrar</button>

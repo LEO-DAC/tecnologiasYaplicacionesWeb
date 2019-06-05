@@ -22,7 +22,7 @@
               <?php
                 $alumnos = new MvcController();
                 $alumnos->vistaMateriaAlumnosController();
-                //$alumnos->eliminarMateriaAlumnoController();
+                $alumnos->eliminarMateriaAlumnoController();
                 ?>
            </tbody>
       </table>
