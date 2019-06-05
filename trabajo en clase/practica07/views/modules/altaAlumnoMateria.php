@@ -8,24 +8,26 @@
                   <div class="col-sm-10">
                      <h3 class="box-title">Alta de alumno en materia</h3>
                        <?php
-                       echo '<select name="id_materia_select" class="form-control" required>';
-                      // echo'  <option disabled selected>Selecciona una materia</option>';
+                       $status="required";
+                       if(isset($_POST["seleccionar"])){
+                            $status="";    
+                       }
+                       echo '<select name="id_materia_select" class="form-control" '.$status.' >';
+                       echo'  <option disabled selected>Selecciona una materia</option>';
                           $materias = new MvcController();
                           $materias->mostrarMateriasController();
                         echo '</select><br>';    
-                        $materias->MostrarProfesorAlumnoAlta(); 
-
-                        echo'<button type="submit" name ="seleccionar" class="btn btn-primary btn-sm waves-effect waves-light" required>Seleccionar</button><br><br>';
-
-                        echo'<select name="id_alumno" class="form-control" required>';
-                         echo'  <option disabled selected>Selecciona una alumno</option>';
+                        echo'<select name="id_alumno_select" class="form-control" '.$status.'>';
+                        echo'  <option disabled selected>Selecciona una alumno</option>';
                           $alumnos = new MvcController();
                           $alumnos->mostrarAlumnosController();      
-                         echo'</select><br>';
-                        
+                        echo'</select><br>';
+                        echo'<button type="submit" name ="seleccionar"  class="btn btn-primary btn-sm waves-effect waves-light" required>Seleccionar</button><br><br>';
+                          $materias->MostrarProfesorAlumnoAlta(); 
+                          $materias->MostrarAlumnoAlta(); 
+  
 
                      ?>
-                    <button type="submit" name ="registrar"class="btn btn-success btn-sm waves-effect waves-light">Registrar</button><br>
                
                   </div>
                </div>  

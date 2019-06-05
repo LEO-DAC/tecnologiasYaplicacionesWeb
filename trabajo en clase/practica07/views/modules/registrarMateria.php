@@ -11,6 +11,7 @@
                      <input type="text" name="nombre" placeholder="nombre de la materia" class="form-control" required><br>
                      <input id="ig-1" type="text" name="clave" class="form-control" placeholder="clave" required><br>
                      <select name="carrera" class="form-control" required>
+                     <?php  echo'<option disabled selected>Selecciona la carrera</option>';?> 
                       <option>Ingeniería en Mecatrónica</option>
                       <option>Ingeniería en tecnologías de Manufactura</option>
                       <option>Ingeniería en tecnologías de la información</option>
@@ -18,6 +19,7 @@
                       <option>Ingeniería en sistemas automotrices</option>
                      </select> <br>
                      <select name="id_profesor" class="form-control" required>
+                     <?php  echo'<option disabled selected>Selecciona el profesor</option>';?> 
                        <?php
                           $profesores = new MvcController();
                           $profesores->mostrarProfesoresController();
