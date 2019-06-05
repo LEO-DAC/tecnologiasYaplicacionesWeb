@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-06-2019 a las 09:06:45
+-- Tiempo de generación: 05-06-2019 a las 02:51:42
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `practica07_final`
+-- Base de datos: `practica07_final_`
 --
 
 -- --------------------------------------------------------
@@ -39,6 +39,7 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`matricula`, `nombres`, `apellidos`) VALUES
+(1410004, 'Carlos Alberto', 'Alarcon Longoria'),
 (1530438, 'Leonardo Daniel', 'Alonso Cepeda');
 
 -- --------------------------------------------------------
@@ -73,6 +74,17 @@ CREATE TABLE `grupo_materia` (
   `id_grupo` int(11) NOT NULL,
   `id_materia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `grupo_materia`
+--
+
+INSERT INTO `grupo_materia` (`id_grupo`, `id_materia`) VALUES
+(5, 4),
+(6, 4),
+(6, 6),
+(7, 5),
+(8, 4);
 
 -- --------------------------------------------------------
 
@@ -113,7 +125,8 @@ CREATE TABLE `materia_alumno` (
 --
 
 INSERT INTO `materia_alumno` (`id_materia`, `id_alumno`) VALUES
-(4, 1530438);
+(4, 1530438),
+(5, 1530438);
 
 -- --------------------------------------------------------
 

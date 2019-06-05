@@ -114,17 +114,19 @@
       }    
 }
 
-
+  //función encargada de registrar los grupos atravez del id de materia y el id del grupo
  public function registrarGrupoMateriaController(){
       if(isset($_POST["registrar"])){
           $id_materia=$_POST["id_materia"];
           $id_grupo=$_POST["id_grupo"];
 
+
           $registrar = Datos::sentenciaInsert("INSERT INTO grupo_materia (id_materia,id_grupo) VALUES($id_materia,$id_grupo)");
 
-        if($registrar=="success"){
+        if($registrar=="success"){//si la inserción es exitosa se redirecciona a la vista de grupo
+          $grupo= Datos::recuperarRegistro($id_grupo,"grupo");
           echo "<script type=\"text/javascript\">alert(\"La materia de dió de alta con exito!!\");</script>";  
-          $URL="index.php?action=mostrarGrupos";
+          $URL='index.php?action=verGrupoMateria&carrera='.$grupo["carrera"].'&cuatrimestre='.$grupo["cuatrimestre"].'&id='.$grupo["id"].'';
           echo "<script >document.location.href='{$URL}';</script>";
           echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
         }else{
@@ -610,7 +612,7 @@ public function editarGrupoController(){
           $alumno  = Datos::recuperarRegistro($_POST["id_alumno_select"],"alumno");
           echo '<label>Alumno:</label>';                
           echo'<input class="form-control" type="text" value="'.$alumno["nombres"].' '.$alumno["apellidos"].'"" name="nombreAlumno" readonly="readonly"><br>';
-          echo'<input type="hidden" value="'.$alumno["id"].'" name="id_alumno" required>';                   
+          echo'<input type="hidden" value="'.$alumno["matricula"].'" name="id_alumno" required>';                   
           echo'<button type="submit" name ="registrar"class=" btn btn-success btn-sm waves-effect waves-light">Registrar</button><br><br>';
       }
   }  
