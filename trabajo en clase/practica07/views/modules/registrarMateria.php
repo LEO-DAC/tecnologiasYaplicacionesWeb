@@ -10,19 +10,19 @@
                      <h3 class="box-title">Registrar materia</h3>
                      <input type="text" name="nombre" placeholder="nombre de la materia" class="form-control" required><br>
                      <input id="ig-1" type="text" name="clave" class="form-control" placeholder="clave" required><br>
-                     <select name="carrera" class="form-control" required>
-                     <?php  echo'<option disabled selected>Selecciona la carrera</option>';?> 
-                      <option>Ingeniería en Mecatrónica</option>
-                      <option>Ingeniería en tecnologías de Manufactura</option>
-                      <option>Ingeniería en tecnologías de la información</option>
-                      <option>Licenciatura en Administración y Gestión empresarial</option>
-                      <option>Ingeniería en sistemas automotrices</option>
+                     <select name="id_carrera" class="form-control" required>
+                     <?php  
+                        echo'<option disabled selected>Selecciona la carrera</option>';
+                        $registrarMateria = new MvcController();
+                        $registrarMateria->mostrarCarrerasController();
+
+                     ?>
                      </select> <br>
                      <select name="id_profesor" class="form-control" required>
-                     <?php  echo'<option disabled selected>Selecciona el profesor</option>';?> 
-                       <?php
-                          $profesores = new MvcController();
-                          $profesores->mostrarProfesoresController();
+                     <?php  
+                          echo'<option disabled selected>Selecciona el profesor</option>'; 
+                       
+                          $registrarMateria->mostrarProfesoresController();
                        ?>
                      </select><br> 
                      <button type="submit" name ="registrar"class="btn btn-primary btn-sm waves-effect waves-light">Registrar</button>

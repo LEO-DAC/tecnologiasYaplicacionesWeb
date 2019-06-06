@@ -15,6 +15,8 @@
                 <th>matricula</th>
                 <th>nombres</th>
                 <th>apellidos</th>
+                <th>carrera</th>
+                <th>tutor</th>
                 <th>Actualizar</th>
                 <th>Eliminar</th>
               </tr>

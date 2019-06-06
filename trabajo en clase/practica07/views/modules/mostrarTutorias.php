@@ -4,7 +4,7 @@
  <center>
   <br><br><br><br><br>
    <div class="box-content card white">
-     <h4 class="box-title">Materia: <?php echo "".$_GET["nombre"];?> </h4> 
+     <h4 class="box-title">Tutorias</h4> 
 
      <div class="col-sm-12">   
       <div class= "row">
@@ -12,17 +12,20 @@
      <table id="example" class="table table-striped table-bordered display" style="width:100%">
             <thead>
               <tr>
-                <th>matricula</th>
-                <th>nombres</th>
-                <th>apellidos</th>
+                <th>fecha</th>
+                <th>tipo</th>
+                <th>tema</th>
+                <th>profesor</th>
+                <th>ver</th>
+                <th>Actualizar</th>
                 <th>Eliminar</th>
               </tr>
             </thead>
             <tbody>
               <?php
-                $alumnos = new MvcController();
-                $alumnos->vistaMateriaAlumnosController();
-                $alumnos->eliminarMateriaAlumnoController();
+                $Tutorias = new MvcController();
+                $Tutorias->vistaTutoriasController();
+                $Tutorias->eliminarTutoriaController();
                 ?>
            </tbody>
       </table>

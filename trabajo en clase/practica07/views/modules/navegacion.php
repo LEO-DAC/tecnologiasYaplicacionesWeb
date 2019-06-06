@@ -33,6 +33,21 @@
 		<div class="container">
 			
 			<ul class="menu">
+
+					<li class="has-sub">
+						<a href="#"><i class="ico fa fa-home"></i><span>Tutorias</span></a>
+						<ul class="sub-menu single">
+							<li class="has-sub">
+								<ul class="child-list">
+									<li><a href="index.php?action=registrarTutoria">registrar</a></li>
+									<li><a href="index.php?action=mostrarTutorias">mostrar</a></li>
+									<li><a href="index.php?action=altaTutoriaAlumno">Agregar alumno a tutoria</a></li>
+								</ul>
+								<!-- /.child-list -->
+							</li>
+						</ul>
+						<!-- /.sub-menu mega -->
+					</li>	
 					<li class="has-sub">
 						<a href="#"><i class="ico fa fa-home"></i><span>Grupos</span></a>
 						<ul class="sub-menu single">

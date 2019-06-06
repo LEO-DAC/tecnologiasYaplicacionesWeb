@@ -10,6 +10,19 @@
                      <h3 class="box-title">Registrar profesor</h3>
                      <input id="ig-1" type="text" name="nombres" class="form-control" placeholder="nombre(s)" required><br>
                      <input id="ig-1" type="text" name="apellidos" class="form-control" placeholder="apellidos" required><br> 
+
+                      <select name="id_carrera" class="form-control" required>
+                         <option disabled selected>Selecciona la carrera</option>'
+                         <?php
+                          $carreras = new MvcController();
+                          $carreras->mostrarCarrerasController();  
+                         ?> 
+                       </select> <br>  
+                     
+                     <input id="ig-1" type="mail" name="correo" class="form-control" placeholder="correo" required><br> 
+                     <input id="ig-1" type="password" name="password" class="form-control" placeholder="password"  required><br> 
+  
+
                     <button type="submit" name ="registrar"class="btn btn-primary btn-sm waves-effect waves-light">Registrar</button>
                
                   </div>

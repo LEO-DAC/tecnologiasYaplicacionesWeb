@@ -14,6 +14,9 @@
               <tr>
                 <th>nombres</th>
                 <th>apellidos</th>
+                <th>Carrera</th>
+                <th>password</th>
+                <th>correo</th>
                 <th>Actualizar</th>
                 <th>Eliminar</th>
               </tr>

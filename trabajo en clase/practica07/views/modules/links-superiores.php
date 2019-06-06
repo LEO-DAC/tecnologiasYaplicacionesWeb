@@ -43,7 +43,9 @@
 	<link rel="stylesheet" href="views/modules/assets/plugin/popover/jquery.popSelect.min.css">
 		<!-- Select2 -->
 	<link rel="stylesheet" href="views/modules/assets/plugin/select2/css/select2.min.css">
-		<!-- Timepicker -->
-	<link rel="stylesheet" href="views/modules/assets/plugin/timepicker/bootstrap-timepicker.min.css">
-		<!-- Touch Spin -->
+	<!-- Touch Spin -->
 	<link rel="stylesheet" href="views/modules/assets/plugin/touchspin/jquery.bootstrap-touchspin.min.css">
+
+
+		<!-- Datepicker -->
+	<link rel="stylesheet" href="views/modules/assets/plugin/datepicker/css/bootstrap-datepicker.min.css">

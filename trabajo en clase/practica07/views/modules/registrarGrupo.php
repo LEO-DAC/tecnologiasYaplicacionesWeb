@@ -7,12 +7,11 @@
                <div class="form-group">
                   <div class="col-sm-10">
                      <h3 class="box-title">Registrar grupo</h3>
-                     <select name="carrera" class="form-control" required>
-                      <?php  echo'<option disabled selected>Selecciona la carrera</option>';?> 
-                        <option>Ingeniería en Mecatrónica</option>
-                        <option>Ingeniería en tecnologías de Manufactura</option><option>Ingenieria en tecnologías de la información</option>
-                        <option>Licenciatura en Administración y Gestión empresarial</option>
-                        <option>Ingeniería en sistemas automotrices</option>
+                     <select name="id_carrera" class="form-control" required>
+                      <?php  echo'<option disabled selected>Selecciona la carrera</option>';
+                          $carreras = new MvcController();
+                          $carreras->mostrarCarrerasController();  
+                      ?> 
                       </select> <br>
                      <select name="cuatrimestre" class="form-control" required>
                       <?php  echo'<option disabled selected>Selecciona el cuatrimestre</option>';?>

@@ -36,14 +36,18 @@
 	<script src="views/modules/assets/scripts/x-editable.demo.min.js"></script>
 
 	<!-- Datepicker -->
-	<script src="views/modules/assets/plugin/datepicker/js/bootstrap-datepicker.min.js"></script
-
-
-	<!-- DateRangepicker -->
-	<script src="views/modules/assets/plugin/daterangepicker/daterangepicker.js"></script>
-
+	<script src="views/modules/assets/plugin/datepicker/js/bootstrap-datepicker.min.js"></script>
 	<!-- Maxlength -->
 	<script src="views/modules/assets/plugin/maxlength/bootstrap-maxlength.min.js"></script>
 
 	<!-- Demo Scripts -->
 	<script src="views/modules/assets/scripts/form.demo.min.js"></script>
+
+
+		<!-- Datepicker -->
+	<script src="views/modules/assets/plugin/datepicker/js/bootstrap-datepicker.min.js"></script
+
+
+	
+
+	
