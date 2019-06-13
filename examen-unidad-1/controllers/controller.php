@@ -25,11 +25,12 @@
 
 
 	public function crearAlumno(){
-		if (isset($_POST["crear"])) {
+		if (isset($_POST["crear"])){
 			$datos = array("matricula"=>$_POST["matricula"],
-							"nombres"=>$_POST["nombres"],
-							"apellidos"=>$_POST["apellidos"],
-							"id_anio_ingreso"=>$_POST["id_anio_ingreso"],
+							 "nombres"=>$_POST["nombres"],
+						   "apellidos"=>$_POST["apellidos"],
+						     "carrera"=>$_POST["carrera"],
+				     "id_anio_ingreso"=>$_POST["id_anio_ingreso"],
 							"id_grupo"=>$_POST["id_grupo"]);
 
 			$respuesta = Datos::registroAlumnoModel($datos);
@@ -68,7 +69,7 @@
 
 
 
-  }
+}
 
 	
 

@@ -15,7 +15,6 @@
 			$stmt->bindParam(":id_anio_ingreso", $datos["id_anio_ingreso"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_grupo", $datos["id_grupo"], PDO::PARAM_INT);
 			
-			
 			if($stmt->execute()){
 				return "success";
 			}

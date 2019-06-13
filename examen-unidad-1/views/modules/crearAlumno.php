@@ -32,8 +32,6 @@
                  $crearAlumno->mostrarGruposController(); 
             ?>
          </select><br><br>
-
-
          <button name="crear" type="submit" >crear</button>
    </form>
    </center>
