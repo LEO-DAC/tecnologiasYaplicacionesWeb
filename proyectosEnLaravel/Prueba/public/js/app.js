@@ -32404,7 +32404,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Prueba/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/dashboard/aplicacionesWeb/proyectosEnLaravel/Prueba/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

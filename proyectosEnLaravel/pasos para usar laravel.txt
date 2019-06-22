@@ -1,31 +1,43 @@
-//descargar composer de getcomposer.org
-//instalar composer de manera global primero
+//descargar composer del citio oficial "getcomposer.org"
+//instalar composer
 
 //mover composer de manera global
-sudo mv composer.phar /usr/local/bin/composer
+>sudo mv composer.phar /usr/local/bin/composer
 
 //checar la version de composer
-composer --version
+>composer --version
 
 //colocarme dentro de la carpeta donde voy a trabajar y ejecutar
 
+>composer global require "laravel/installer"
 
-composer global require "laravel/installer"
-
-
-sudo apt autoremove
 
 //crear un proyecto, se coloca la version de laravel que  se desea usar, por defecto se usa la ultima version estable  
 
-composer create-project --prefer-dist laravel/laravel proyecto1
+//ambos hacen lo mismo
+>composer create-project --prefer-dist laravel/laravel proyecto_1
+
+>composer create-project laravel/laravel proyecto_1 --prefer-dist
 
 //solucion en caso de no poder con el comando anterior
-composer create-project --prefer-dist laravel/laravel blog "5.2.*"
-
+>composer create-project --prefer-dist laravel/laravel blog "5.2.*"
 
 //corre el servidor de artisan
-php artisan serve
+>php artisan serve
 
 //localhost:8000
+
+instalar laravel mix
+
+-ejecutar (para cada proyecto nuevo)
+>npm install 
+
+//crea el archivo mixeado
+>npm run dev
+
+*se agrega el script de js a principal.blade.php para evitar codigo malicioso de js
+
+*se agrega un div con el id="app"
+
 
 
