@@ -1,13 +1,13 @@
 <?php
 	$servername = "localhost";
 	$username = "leo";
-	$dbname   = "'p04_mapas'";
+	$dbname   = "p04_mapas";
 	$password = "Besekyspod3124755";	
 
 	$nombre    = $_POST['nombre'];
 	$duracion ) $_POST['duracion'];	
 
-	echo "Registro Recibido"."\n"."Nombre: ".$nombre."\n";	
+	echo "Registro Recibido"."\n"."nombre: ".$nombre."\n";	
 
 
 	// Create connection
