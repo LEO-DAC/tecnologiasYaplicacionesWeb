@@ -5,9 +5,9 @@
 	$password = "Besekyspod3124755";	
 
 	$nombre    = $_POST['nombre'];
-	$duracion ) $_POST['duracion'];	
+	$duracion  = $_POST['duracion'];	
 
-	echo "Registro Recibido"."\n"."nombre: ".$nombre."\n";	
+	echo "Registro Recibido"."\n"."nombre: ".$nombre."\n duracion: ".$duracion."\n";	
 
 
 	// Create connection
