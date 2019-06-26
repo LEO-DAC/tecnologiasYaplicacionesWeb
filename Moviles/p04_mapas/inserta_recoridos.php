@@ -5,8 +5,10 @@
 	$password = "Besekyspod3124755";	
 
 	$nombre    = $_POST['nombre'];
+	$duracion ) $_POST['duracion'];	
 
 	echo "Registro Recibido"."\n"."Nombre: ".$nombre."\n";	
+
 
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -16,8 +18,8 @@
 	} 	
 	
 
-	$sql = "INSERT INTO recorridos (nombre)
-	VALUES ('$nombre')";
+	$sql = "INSERT INTO recorridos (nombre,duracion)
+	VALUES ('$nombre','$duracion')";
 
 	if ($conn->query($sql) === TRUE) {
 		echo "Registro Insertado de Manera Exitosa"."\n";
