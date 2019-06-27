@@ -24,7 +24,7 @@
 		// output data of each row
 		while($row = $result->fetch_assoc()) {
 			//echo "id: " . $row["id"]. " - Name: " . $row["nombre"]. " " . $row["apellidop"]. " " . $row["apellidom"]. "\n";
-			echo $row["nombre"].",". $row["latitud"].",". $row["longitud"]. "\n";
+			echo $row["nombre"].",". $row["latitud"].",". $row["longitud"].",". $row["id"]. "\n";
 		}
 	} else {
 		echo "0 results";
