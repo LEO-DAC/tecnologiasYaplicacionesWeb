@@ -5,9 +5,9 @@
 	$password = "Besekyspod3124755";	
 
 	$nombre    = $_POST['nombre'];
-	$latitud = $_POST['latitud'];
-	$longitud = $_POST['longitud'];
-
+	$latitud   = $_POST['latitud'];
+	$longitud  = $_POST['longitud'];
+	$longitud  = $_POST['id'];
 	
 	echo "Registro Recibido"."\n"."Nombre: ".$nombre."\n latitud: ".$latitud."\n longitud: ".$longitud."\n";	
 
@@ -19,8 +19,7 @@
 	} 	
 	
 
-	$sql = "INSERT INTO puntos (nombre,latitud,longitud)
-	VALUES ('$nombre','$latitud','$longitud')";
+	$sql = "INSERT INTO puntos (nombre,latitud,longitud,id) VALUES ('$nombre','$latitud','$longitud','id')";
 
 	if ($conn->query($sql) === TRUE) {
 		echo "Registro Insertado de Manera Exitosa"."\n";
