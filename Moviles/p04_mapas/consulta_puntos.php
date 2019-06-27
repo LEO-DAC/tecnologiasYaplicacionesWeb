@@ -17,7 +17,7 @@
 		die("Connection failed: " . $conn->connect_error);
 	} 	
 	
-	$sql = "SELECT nombre, latitud, longitud FROM puntos";
+	$sql = "SELECT nombre, latitud, longitud ,id FROM puntos";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
