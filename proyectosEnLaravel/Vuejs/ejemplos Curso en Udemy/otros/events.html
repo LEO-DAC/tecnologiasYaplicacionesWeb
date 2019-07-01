@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="js/vue.js"></script>
+    <title>Vue</title>
+</head>
+
+<body>
+    <div id="app">
+       <button v-on:click="incrementar">Incrementar</button>
+       <button v-on:click="decrementar">Decrementar</button>
+       
+       <h1 :style="{color:'blue', fontSize:numero+'px'}">Hola mundo {{numero}}</h1>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

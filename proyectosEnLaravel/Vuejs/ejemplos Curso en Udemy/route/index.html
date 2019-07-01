@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>App</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div>LOGO</div>
+            <nav>
+                <ul>
+                    <li>
+                        <router-link to="/">Home</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/about">About</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/otro-link">Otro enlace</router-link>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <router-view></router-view>
+        </main>
+        <footer>
+            <small>© Myself</small>
+        </footer>
+    </div>
+
+    <script type="text/x-template" id="homepage">
+        <div>
+          <h1>Hello &amp; Welcome</h1>
+          <p>Welcome to my website. Feel free to browse around.</p>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="PageNotFound">
+        <div>
+          <h1>Lo siento</h1>
+          <p>Página no encontrada :(</p>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="about">
+        <div>
+          <h1>About Me</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed
+      metus magna. Vivamus eget est nisi. Phasellus vitae nisi sagittis, ornare
+      dui quis, pharetra leo. Nullam eget tellus velit. Sed tempor lorem augue,
+      vitae luctus urna ultricies nec. Curabitur luctus sapien elit, non pretium
+      ante sagittis blandit. Nulla egestas nunc sit amet tellus rhoncus, a
+      ultrices nisl varius. Nam scelerisque lacus id justo congue maximus. Etiam
+      rhoncus, libero at facilisis gravida, nibh nisi venenatis ante, sit amet
+      viverra justo urna vel neque.</p>
+          <p>Curabitur et arcu fermentum, viverra lorem ut, pulvinar arcu. Fusce
+      ex massa, vehicula id eros vel, feugiat commodo leo. Etiam in sem rutrum,
+      porttitor velit in, sollicitudin tortor. Interdum et malesuada fames ac
+      ante ipsum primis in faucibus. Donec ac sapien efficitur, pretium massa at,
+      vehicula ligula. Vestibulum turpis quam, feugiat sed orci id, eleifend
+      pretium urna. Nullam faucibus arcu eget odio venenatis ornare.</p>
+        </div>
+    </script>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
