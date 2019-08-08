@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejercicio con vuex</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
+</head>
+<body>
+
+    <div id ="app">
+        <titulo></titulo>
+        <hijo></hijo>    
+    </div>
+    
+    <script>
+
+        Vue.component('titulo',{
+            template: //html
+            `
+            <div>
+                <h2>componente titulo </h2>
+                <h2>{{ numero }}</h2>      
+           </div>
+            `,
+            computed:{
+                  //toma un arreglo dentro de los datos que hay en store
+                 ...Vuex.mapState(['numero'])   
+
+            } 
+        });
+
+        Vue.component('hijo',{
+            template: //html
+            `
+            <div>
+                <h2>componente hijo</h2>
+                <button @click="aumentar">+</button>   
+                <button @click="decrementar(2)">-</button>        
+                <h2>{{ numero }}</h2>      
+            </div>        
+            `,
+            computed:{
+                  //toma un arreglo dentro de los datos que hay en store
+                 ...Vuex.mapState(['numero'])   
+
+            },
+            methods:{
+                ...Vuex.mapMutations(['aumentar','decrementar'])
+            }  
+        });
+
+        const store  = new Vuex.Store({
+            state:{
+              numero:10  
+            },
+            mutations:{
+                aumentar(state){
+                    state.numero++
+                },
+                decrementar(state,n){
+                    state.numero-=n
+                }
+            }
+        });
+        
+        new Vue({
+           el: '#app',
+           store
+        });
+    </script>   
+</body>
+</html>
