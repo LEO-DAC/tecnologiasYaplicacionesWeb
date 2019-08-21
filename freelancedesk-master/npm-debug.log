@@ -7,8 +7,8 @@
 6 silly lifecycle @~predev: no script for predev, continuing
 7 info lifecycle @~dev: @
 8 verbose lifecycle @~dev: unsafe-perm in lifecycle true
-9 verbose lifecycle @~dev: PATH: /usr/share/npm/bin/node-gyp-bin:/var/www/html/ProyectoTAW/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-10 verbose lifecycle @~dev: CWD: /var/www/html/ProyectoTAW
+9 verbose lifecycle @~dev: PATH: /usr/share/npm/bin/node-gyp-bin:/opt/lampp/htdocs/dashboard/aplicacionesWeb/freelancedesk-master/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+10 verbose lifecycle @~dev: CWD: /opt/lampp/htdocs/dashboard/aplicacionesWeb/freelancedesk-master
 11 silly lifecycle @~dev: Args: [ '-c', 'npm run development' ]
 12 silly lifecycle @~dev: Returned: code: 1  signal: null
 13 info lifecycle @~dev: Failed to exec dev script
@@ -23,8 +23,8 @@
 14 verbose stack     at maybeClose (internal/child_process.js:925:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)
 15 verbose pkgid @
-16 verbose cwd /var/www/html/ProyectoTAW
-17 error Linux 4.15.0-38-generic
+16 verbose cwd /opt/lampp/htdocs/dashboard/aplicacionesWeb/freelancedesk-master
+17 error Linux 4.18.0-25-generic
 18 error argv "/usr/bin/node" "/usr/bin/npm" "run" "dev"
 19 error node v8.10.0
 20 error npm  v3.5.2
